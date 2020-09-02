@@ -6,6 +6,14 @@
  * @flow strict-local
  */
 
+
+
+
+//TouchableOpacity
+
+
+
+
 import 'react-native-gesture-handler';
 import React from 'react';
 import firebase from 'firebase/app'

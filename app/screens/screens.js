@@ -11,7 +11,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Page2 from './page-two'
+import Login from './login'
 import Home from './home'
+import Signup from './signup'
+import Volunteer from './volunteer'
 const Stack = createStackNavigator();
 
 class Screens extends React.Component {
@@ -22,6 +25,9 @@ render() {
     <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="page-two" component={Page2} />
+          <Stack.Screen name="login" component={Login} />
+          <Stack.Screen name="signup" component={Signup} />
+          <Stack.Screen name="volunteer" component={Volunteer} />
         </Stack.Navigator>
   </NavigationContainer>
   )

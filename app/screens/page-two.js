@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  Button,
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
@@ -13,17 +14,32 @@ import 'firebase/auth'
 
 export default class Page2 extends Component{
   componentDidMount() {
-    firebase.auth().signInWithEmailAndPassword("juliasusser@gmail.com", "Jsusser3").then(function(result) {
-    console.log("success")
-    })
-    .catch(function(error) {
-    console.log("error")
-    });
+  }
+  constructor(props) {
+    super(props);
   }
   render(){
     return (
       <View>
-      <Text>New Page!</Text>
+      <Button
+        title={'Donate'}
+        onPress={() => this.props.navigation.navigate('login')}
+        ></Button>
+      <Button
+        title={'Donate'}
+        onPress={() => this.props.navigation.navigate('login')}
+        ></Button>
+      <Button
+        title={'Volenteer'}
+        onPress={() => this.props.navigation.navigate('volunteer')}
+      ></Button>
+      <Button
+        title={'Instagram'}
+      ></Button>
+      <Button
+        title={'ContactUs'}
+      ></Button>
+
       </View>
     )
   }
