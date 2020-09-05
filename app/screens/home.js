@@ -8,9 +8,10 @@ import {
   View,
   Text,
   StatusBar,
+  Image,
+  Dimensions,
 } from 'react-native';
-
-
+import IconAntDesign from 'react-native-vector-icons/AntDesign'
 
 import {
   Header,
@@ -23,69 +24,111 @@ import {
 const Home: () => React$Node = (props) => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
 
+      <SafeAreaView style={styles.body}>
 
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <TouchableOpacity onPress={() => props.navigation.navigate('login')}>
-              <Text style={styles.sectionTitle}>Login</Text>
-              </TouchableOpacity>
+      <IconAntDesign name="left" size={50}/>
+          <View >
+          <View style={styles.imgContainer}>
+          <Image style={styles.Image}
+        source={require('./logo1.png')}
+      />
 
-            </View>
+      <Image style={styles.Image2}
+          source={require('./logo2.png')}
+        />
         </View>
-        <View style={styles.body}>
-          <View style={styles.sectionContainer}>
-            <TouchableOpacity onPress={() => props.navigation.navigate('signup')}>
-            <Text style={styles.sectionTitle}>Sign Up</Text>
-            </TouchableOpacity>
+        <TouchableOpacity
+         style={styles.sectionContainer}
+         onPress={() => props.navigation.navigate('login')}
+       >
+         <Text>Login</Text>
+       </TouchableOpacity>
 
-          </View>
-      </View>
+        </View>
+        <View style={styles.or}>
+        <Text>OR</Text>
+        </View>
 
-      </SafeAreaView>
+      <TouchableOpacity
+       style={styles.sectionContainer2}
+       onPress={() => props.navigation.navigate('signup')}
+     >
+       <Text>Signup</Text>
+     </TouchableOpacity>
+
+      </SafeAreaView >
     </>
   );
 };
-
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10
   },
   engine: {
     position: 'absolute',
     right: 0,
   },
+  Text : {
+    color: 'white',
+    fontWeight:'bold',
+  },
+  or:{
+    marginTop: 25,
+    alignItems:'center'
+  },
+  Image : {
+    width: width *.5,
+    height:30,
+    height:height*.1,
+    resizeMode: 'contain',
+    paddingBottom: 0,
+  },
+  imgContainer: {
+    marginTop:width*.4,
+    alignItems:'center'
+  },
+  sectionContainer : {
+      marginTop: 50,
+      borderRadius: 50,
+      alignItems: 'center',
+      marginLeft: width*.15,
+      height:50,
+      width: width * .7,
+      backgroundColor: 'orange',
+      justifyContent: 'center',
+
+  },
+  sectionContainer2 : {
+      marginTop: 25,
+      borderRadius: 50,
+      alignItems: 'center',
+      marginLeft: width*.15,
+      height:50,
+      width: width * .7,
+      backgroundColor: 'orangered',
+      justifyContent: 'center',
+
+  },
+  Image2 : {
+    marginTop:0,
+    height:height*.1,
+    width: width *.9,
+    resizeMode: 'contain'
+  },
   body: {
-    backgroundColor: Colors.white,
+
+    height:height,
+    backgroundColor: 'white',
   },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+
 });
 
 export default Home

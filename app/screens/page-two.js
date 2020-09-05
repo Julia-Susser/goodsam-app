@@ -8,6 +8,7 @@ import {
   Button,
   StatusBar,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -22,6 +23,7 @@ export default class Page2 extends Component{
     return (
       <View>
       <Button
+        style={styles.sectionContainer2}
         title={'Donate'}
         onPress={() => this.props.navigation.navigate('login')}
         ></Button>
@@ -35,6 +37,7 @@ export default class Page2 extends Component{
       ></Button>
       <Button
         title={'Instagram'}
+        onPress={() => this.props.navigation.navigate('instagram')}
       ></Button>
       <Button
         title={'ContactUs'}
@@ -44,3 +47,57 @@ export default class Page2 extends Component{
     )
   }
 }
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
+const styles = StyleSheet.create({
+  scrollView: {
+
+  },
+  engine: {
+    position: 'absolute',
+    right: 0,
+  },
+  Text : {
+    color: 'white',
+    fontWeight:'bold',
+  },
+  or:{
+    marginTop: 25,
+    alignItems:'center'
+  },
+  Image : {
+    width: width *.5,
+    height:30,
+    height:height*.1,
+    resizeMode: 'contain',
+    paddingBottom: 0,
+  },
+  imgContainer: {
+    marginTop:width*.4,
+    alignItems:'center'
+  },
+  sectionContainer : {
+      marginTop: 50,
+      borderRadius: 50,
+      alignItems: 'center',
+      marginLeft: width*.15,
+      height:50,
+      width: width * .7,
+      backgroundColor: 'orange',
+      justifyContent: 'center',
+
+  },
+  
+  Image2 : {
+    marginTop:0,
+    height:height*.1,
+    width: width *.9,
+    resizeMode: 'contain'
+  },
+  body: {
+
+    height:height,
+    backgroundColor: 'white',
+  },
+
+});

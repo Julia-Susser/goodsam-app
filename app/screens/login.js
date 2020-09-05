@@ -4,6 +4,10 @@ import { Text, TextInput, Alert, Button, View, StyleSheet } from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 export default class Login extends Component {
+  static navigationOptions = {
+    //To hide the NavigationBar from current Screen
+    header: null
+  };
   constructor(props) {
     super(props);
 
@@ -71,7 +75,7 @@ export default class Login extends Component {
 
             firebase.auth().signInWithEmailAndPassword(username, password).then(function(result) {
             navigate('page-two')
-            
+
 
             })
             .catch(function(error) {
