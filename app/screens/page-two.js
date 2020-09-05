@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-
+import IconAntDesign from 'react-native-vector-icons/AntDesign'
 export default class Page2 extends Component{
   componentDidMount() {
   }
@@ -21,7 +21,11 @@ export default class Page2 extends Component{
   }
   render(){
     return (
+      <SafeAreaView style={styles.body}>
+      <IconAntDesign name="left" size={50}/>
+
       <View>
+
       <Button
         style={styles.sectionContainer2}
         title={'Donate'}
@@ -44,6 +48,7 @@ export default class Page2 extends Component{
       ></Button>
 
       </View>
+      </SafeAreaView >
     )
   }
 }
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
 
   },
-  
+
   Image2 : {
     marginTop:0,
     height:height*.1,

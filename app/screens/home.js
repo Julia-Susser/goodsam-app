@@ -27,7 +27,7 @@ const Home: () => React$Node = (props) => {
 
       <SafeAreaView style={styles.body}>
 
-      <IconAntDesign name="left" size={50}/>
+
           <View >
           <View style={styles.imgContainer}>
           <Image style={styles.Image}
@@ -42,7 +42,7 @@ const Home: () => React$Node = (props) => {
          style={styles.sectionContainer}
          onPress={() => props.navigation.navigate('login')}
        >
-         <Text>Login</Text>
+         <Text style={styles.Text}>Login</Text>
        </TouchableOpacity>
 
         </View>
@@ -54,7 +54,7 @@ const Home: () => React$Node = (props) => {
        style={styles.sectionContainer2}
        onPress={() => props.navigation.navigate('signup')}
      >
-       <Text>Signup</Text>
+       <Text style={styles.Text}>Signup</Text>
      </TouchableOpacity>
 
       </SafeAreaView >
