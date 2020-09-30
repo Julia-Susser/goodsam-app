@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  Image,
   Button,
   StatusBar,
   TouchableOpacity,
@@ -12,43 +13,69 @@ import {
 } from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import IconAntDesign from 'react-native-vector-icons/AntDesign'
+import IconEntypo from 'react-native-vector-icons/Entypo'
 export default class Page2 extends Component{
   componentDidMount() {
+
+    var user = firebase.auth().currentUser;
+
+    if (user != null) {
+      var namey = user.displayName;
+    }else{
+      this.props.navigation.navigate('Home')
+    }
+    this.setState({ name: namey})
   }
   constructor(props) {
     super(props);
+    this.state = {
+     name:[]
+    };
   }
-  render(){
+  render(
+
+  ){
     return (
-      <SafeAreaView style={styles.body}>
-      <IconAntDesign name="left" size={50}/>
+  <SafeAreaView style={styles.body}>
+      <TouchableOpacity
+       onPress={() => this.props.navigation.navigate('Home')}>
+         <IconEntypo name="chevron-thin-left" size={30}/>
+      </TouchableOpacity>
 
-      <View>
+  <View>
 
-      <Button
-        style={styles.sectionContainer2}
-        title={'Donate'}
-        onPress={() => this.props.navigation.navigate('login')}
-        ></Button>
-      <Button
-        title={'Donate'}
-        onPress={() => this.props.navigation.navigate('login')}
-        ></Button>
-      <Button
-        title={'Volenteer'}
-        onPress={() => this.props.navigation.navigate('volunteer')}
-      ></Button>
-      <Button
-        title={'Instagram'}
-        onPress={() => this.props.navigation.navigate('instagram')}
-      ></Button>
-      <Button
-        title={'ContactUs'}
-      ></Button>
+            <View style={styles.imgContainer}>
+            <Image style={styles.Image}
+          source={require('./logo1.png')}
+          />
 
-      </View>
-      </SafeAreaView >
+          <Image style={styles.Image2}
+            source={require('./logo2.png')}
+          />
+          <Text style={styles.welcome}> Welcome {this.state.name}</Text>
+</View>
+      <TouchableOpacity style={[styles.sectionContainer, styles.donate]}
+       onPress={() => this.props.navigation.navigate('login')}>
+       <Text style={styles.Text}>Donate</Text>
+     </TouchableOpacity>
+
+     <TouchableOpacity style={[styles.sectionContainer, styles.volunteer]}
+      onPress={() => this.props.navigation.navigate('volunteer')}>
+      <Text style={styles.Text}>Volunteer</Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity style={[styles.sectionContainer, styles.contactus]}
+     onPress={() => this.props.navigation.navigate('login')}>
+     <Text style={styles.Text}>ContactUs</Text>
+   </TouchableOpacity>
+
+   <TouchableOpacity style={[styles.sectionContainer, styles.instagram]}
+    onPress={() => this.props.navigation.navigate('instagram')}>
+    <Text style={styles.Text}>Instagram</Text>
+  </TouchableOpacity>
+
+  </View>
+  </SafeAreaView >
     )
   }
 }
@@ -62,6 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
   },
+
   Text : {
     color: 'white',
     fontWeight:'bold',
@@ -81,6 +109,13 @@ const styles = StyleSheet.create({
     marginTop:width*.4,
     alignItems:'center'
   },
+  welcome: {
+    marginTop:height*.05,
+    fontSize: 30,
+    color:'#840404',
+    fontWeight: "bold",
+
+  },
   sectionContainer : {
       marginTop: 50,
       borderRadius: 50,
@@ -92,17 +127,41 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
 
   },
+  donate : {
+    backgroundColor: '#ffae42',
 
-  Image2 : {
-    marginTop:0,
-    height:height*.1,
-    width: width *.9,
-    resizeMode: 'contain'
+  },
+  volunteer : {
+    backgroundColor: '#fb8c00',
+
+  },
+  contactus : {
+    backgroundColor: '#e65100',
+  },
+  instagram : {
+    backgroundColor: '#840404',
   },
   body: {
 
     height:height,
     backgroundColor: 'white',
+  },
+  imgContainer: {
+
+    alignItems:'center'
+  },
+  Image : {
+    width: width *.5,
+    height:30,
+    height:height*.1,
+    resizeMode: 'contain',
+    paddingBottom: 0,
+  },
+  Image2 : {
+    marginTop:0,
+    height:height*.1,
+    width: width *.9,
+    resizeMode: 'contain'
   },
 
 });

@@ -6,6 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   View,
+  Dimensions,
+  Hr,
   Text,
   Button,
   StatusBar,
@@ -13,14 +15,13 @@ import {
 } from 'react-native';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-
+import IconEntypo from 'react-native-vector-icons/Entypo'
 export default class Page2 extends Component{
   constructor(props) {
     super(props);
     this.state = {
      items:[]
-    };
-    this.tableData = [['Oppurtnity', 'Date', 'Type']]
+   };
 
   }
   componentDidMount() {
@@ -35,47 +36,73 @@ export default class Page2 extends Component{
     }
     rows.push(rowObject);
   }
+  var w = ''
+  var listItems = []
+  var datee = ''
+  var time = ''
+  var raw_list = [];
+  var w = ''
+//<Table style={styles.table} borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}><Rows data={[[`Oppurtunity: ${item.Oppurtunity}`],[`Date: ${item.Date}`],[`Type: ${item.Type}`]]}/></Table>
+    rows.map((item) =>
+      {
+        w = <View style={styles.box}><Text style={styles.text}>Oppurtunity: {item.Oppurtunity}{"\n"}</Text></View>
+        raw_list.push(w);
+      }
+    )
+    console.log(raw_list)
+    this.setState({ items: raw_list})
 
-    this.setState({ items: rows })
 
-});
+
+
+  });
 
   }
-
+  //jsusser@urbanschool.org
   render(){
-    const listItems = this.state.items.map((item) =>
-    [item.Oppurtunity, item.Date, item.Type]
-  );
-    tableData = listItems
-  console.log(listItems)
-      tableHead = ['Oppurtnity', 'Date', 'Type']
-      
-    return (
-      <View>
 
-      <Button
-        title={'hey'}
-        onPress={() => this.props.navigation.navigate('login')}
-        ></Button>
-      <Button
-        title={'Donate'}
-        onPress={() => this.props.navigation.navigate('login')}
-        ></Button>
-      <Button
-        title={'Volenteer'}
-        onPress={() => this.props.navigation.navigate('volunteer')}
-      ></Button>
-      <Button
-        title={'Instagram'}
-      ></Button>
-      <Button
-        title={'ContactUs'}
-      ></Button>
-      <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
-          <Row data={tableHead}/>
-          <Rows data={tableData}/>
-        </Table>
+const listItems = this.state.items
+console.log(listItems)
+
+
+    return (
+      <SafeAreaView>
+      <TouchableOpacity
+       onPress={() => this.props.navigation.navigate('page-two')}>
+         <IconEntypo name="chevron-thin-left" size={30}/>
+      </TouchableOpacity>
+      <View>
+        {listItems}
+        
       </View>
+      </SafeAreaView>
     )
   }
 }
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
+const styles = StyleSheet.create({
+  table : {
+    marginTop:40,
+
+
+  },
+  box:{
+    backgroundColor: '#fff',
+          borderRadius: 4,
+          borderWidth: 0.5,
+          borderColor: '#000',
+
+          margin: 20,
+  },
+  body: {
+
+    height:height,
+    backgroundColor: 'white',
+  },
+  text: {
+    fontSize: 20,
+    padding: 10,
+  }
+
+});

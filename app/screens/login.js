@@ -52,13 +52,14 @@ export default class Login extends Component {
          onPress={() => {
            const { email, password } = this.state;
            firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
+          alert("success")
            navigate('page-two')
            })
            .catch(function(error) {
            console.log("error")
            alert(error)
            });}}>
-         <Text style={styles.Text}>Signup</Text>
+         <Text style={styles.Text}>Login</Text>
        </TouchableOpacity>
 
       </View>

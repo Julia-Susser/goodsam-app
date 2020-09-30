@@ -32,14 +32,14 @@ export default class Login extends Component {
        onPress={() => navigate('Home')}>
          <IconAntDesign name="left" size={50}/>
       </TouchableOpacity>
-      <Text style={styles.header}>Log In</Text>
+      <Text style={styles.header}>Sign Up</Text>
       <View style={styles.container}>
 
         <TextInput
           value={this.state.name}
           onChangeText={(name) => this.setState({ name })}
            label='Name'
-           placeholder='  Name...'
+           placeholder='  Full Name...'
           style={styles.input}
         />
 

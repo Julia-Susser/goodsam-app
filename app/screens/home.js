@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import {
   TouchableOpacity,
@@ -20,11 +20,26 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import firebase from 'firebase/app'
+import 'firebase/auth'
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
 
-const Home: () => React$Node = (props) => {
-  return (
-    <>
+    this.state = {
+      email: '',
+      password: '',
 
+    };
+  }
+  componentDidMount() {
+
+  }
+
+  render() {
+
+    const { navigate } = this.props.navigation;
+    return (
       <SafeAreaView style={styles.body}>
 
 
@@ -40,7 +55,7 @@ const Home: () => React$Node = (props) => {
         </View>
         <TouchableOpacity
          style={styles.sectionContainer}
-         onPress={() => props.navigation.navigate('login')}
+         onPress={() => this.props.navigation.navigate('volunteer')}
        >
          <Text style={styles.Text}>Login</Text>
        </TouchableOpacity>
@@ -52,15 +67,16 @@ const Home: () => React$Node = (props) => {
 
       <TouchableOpacity
        style={styles.sectionContainer2}
-       onPress={() => props.navigation.navigate('signup')}
+       onPress={() => this.props.navigation.navigate('signup')}
      >
        <Text style={styles.Text}>Signup</Text>
      </TouchableOpacity>
 
       </SafeAreaView >
-    </>
-  );
-};
+
+    );
+  }
+}
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
@@ -130,5 +146,3 @@ const styles = StyleSheet.create({
   },
 
 });
-
-export default Home
