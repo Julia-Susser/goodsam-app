@@ -51,15 +51,18 @@ export default class VolunteerSignUp extends Component {
        onPress={() => navigate('volunteer')}>
          <IconAntDesign name="left" size={50}/>
       </TouchableOpacity>
-
-      <Text style={styles.header}>Sign up for {this.state.oppurtunity}</Text>
       <View style={styles.container}>
-      <View style={styles.view}>
+      <Text style={styles.header}>Sign up for {this.state.oppurtunity}</Text>
+
+      <View style={{
+        alignItems: 'center'
+      }}>
+      <View>
       <Text>Date: {this.state.date}</Text>
       <Text>Manager Name: {this.state.date}</Text>
       <Text>{this.state.description}</Text>
-
-
+      </View>
+      <View>
       <Text style={styles.title}>Name</Text>
       <TextInput
         value={this.state.name}
@@ -75,7 +78,6 @@ export default class VolunteerSignUp extends Component {
         style={styles.input}
       />
 
-
       <Text style={styles.title}>Message</Text>
       <TextInput
         onChangeText={(message) => this.setState({ message })}
@@ -83,16 +85,17 @@ export default class VolunteerSignUp extends Component {
         style={styles.text}
       />
       </View>
+      </View>
         <TouchableOpacity
          style={styles.sectionContainer2}
          onPress={() => {
            const { oppurtunity, date, description, name, email, phoneNumber, message, remail, rname } = this.state;
            const db = firebase.database();
            var nemail = remail.split(".")[0]
-           db.ref('userIds/'+nemail).on('value', function(snapshot) {
+           db.ref('userIds/'+nemail).once('value', function(snapshot) {
              var key = snapshot.val()
              if (key != null){
-               db.ref('users/'+key).push({
+               db.ref('users/'+key+"/"+oppurtunity).set({
                  oppurtunity: oppurtunity,
                  date: date,
                  attending: true,
@@ -101,12 +104,22 @@ export default class VolunteerSignUp extends Component {
                  phoneNumber: phoneNumber,
                  message: message
                })
-               navigate("page-two")
+
              }else{
                var user_ref = db.ref('users').push()
                var key = user_ref.key
                db.ref('userIds').update({[nemail]:key})
+               db.ref('users/'+key+"/"+oppurtunity).set({
+                 oppurtunity: oppurtunity,
+                 date: date,
+                 attending: true,
+                 name: name,
+                 email: email,
+                 phoneNumber: phoneNumber,
+                 message: message
+               })
              }
+             navigate("page-two")
            });
           }}>
          <Text style={styles.Text}>Send Message</Text>
@@ -125,8 +138,9 @@ const styles = StyleSheet.create({
   container: {
 
     alignItems: 'center',
-    justifyContent: 'center'
+
   },
+
   title: {
 
   },

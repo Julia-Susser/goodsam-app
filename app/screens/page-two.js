@@ -15,10 +15,12 @@ import {
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import IconEntypo from 'react-native-vector-icons/Entypo'
+import IconSimple from 'react-native-vector-icons/SimpleLineIcons'
 import {app} from '../config';
 export default class Page2 extends Component{
 
   componentDidMount() {
+
 
     var user = firebase.auth().currentUser;
 
@@ -42,7 +44,7 @@ export default class Page2 extends Component{
   <SafeAreaView style={styles.body}>
       <TouchableOpacity
        onPress={() => this.props.navigation.navigate('Home')}>
-         <IconEntypo name="chevron-thin-left" size={30}/>
+         <IconSimple name="logout" size={50}/>
       </TouchableOpacity>
 
   <View>

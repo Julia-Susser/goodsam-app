@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, Dimensions,TouchableOpacity, SafeAreaView, Alert, Button, View, StyleSheet } from 'react-native';
-import IconAntDesign from 'react-native-vector-icons/AntDesign'
+import IconEntypo from 'react-native-vector-icons/Entypo'
+
 import {app} from '../config';
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -15,6 +16,7 @@ export default class Login extends Component {
     };
   }
   componentDidMount() {
+
     firebase.auth().signOut().then(function() {
 
   }).catch(function(error) {
@@ -29,7 +31,7 @@ export default class Login extends Component {
 
       <TouchableOpacity
        onPress={() => navigate('Home')}>
-         <IconAntDesign name="left" size={50}/>
+         <IconEntypo name="chevron-thin-left" size={30}/>
       </TouchableOpacity>
       <Text style={styles.header}>Log In</Text>
       <View style={styles.container}>
@@ -51,9 +53,12 @@ export default class Login extends Component {
         <TouchableOpacity
          style={styles.sectionContainer2}
          onPress={() => {
+
            const { email, password } = this.state;
+
            firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
            navigate('page-two')
+
            })
            .catch(function(error) {
            console.log("error")

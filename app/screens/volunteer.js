@@ -26,21 +26,35 @@ export default class Volunteer extends Component{
    };
 
   }
-  get_key = ()=>{
 
-    /*db.ref('userIds/'+nemail).on('value', function(snapshot) {
-        var key = snapshot.val()
-        console.log(key)
-        this.setState({key : key})
-      });*/
-
-
+    send = (item )=>{
+      console.log("awesome")
+      this.props.navigation.navigate(item.page, {
+      oppurtunity: item.Oppurtunity, date: item.Date, type: item.Type, managerName: item.ManagerName, description: item.Description}
+    )
+    }
+    signedup = (item)=>{
+      if (item.signup==="Attending"){
+      return <Text style={styles.signedup}>{item.signup}</Text>
+    }
+    }
+    button = (item)=>{
+      if (item.signup==="Attending"){
+      return <Text>Changes? Contact Us.</Text>
+    }else{
+      return item.signup
+    }
+    }
+    color = (item)=>{
+      if (item.signup==="Attending"){
+      return "orange"
+    }else{
+      return "darkblue"
+    }
     }
   componentDidMount() {
-
     fetch("https://sheets.googleapis.com/v4/spreadsheets/1qb3nY8_7PmjFfU1a6aJfYKS9AEV9Q1VXVc8WL0Mc6EE/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=AIzaSyAmwRJCnSaR3nv-jl24zsvZbUxzZhbbLkQ").then(response => response.json()).then(data => {
   let batchRowValues = data.valueRanges[0].values;
-
   const rows = [];
   for (let i = 1; i < batchRowValues.length; i++) {
     let rowObject = {};
@@ -49,16 +63,8 @@ export default class Volunteer extends Component{
     }
     rows.push(rowObject);
   }
-  var w = ''
-  var listItems = []
-  var datee = ''
-  var time = ''
-  var raw_list = [];
-  var w = ''
 //<Table style={styles.table} borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}><Rows data={[[`Oppurtunity: ${item.Oppurtunity}`],[`Date: ${item.Date}`],[`Type: ${item.Type}`]]}/></Table>
 
-
-    this.setState({ items: rows})
     var user = firebase.auth().currentUser;
 
     if (user != null) {
@@ -69,27 +75,40 @@ export default class Volunteer extends Component{
     const db = firebase.database();
     var nemail = email.split(".")[0]
     var userId = firebase.auth().currentUser.uid;
-    db.ref('userIds/'+nemail).on('value', querySnapShot => {
-      console.log(rows)
-
-      db.ref('users/'+querySnapShot.val()).on('value', querySnapShot2 => {
+    db.ref('userIds/'+nemail).once('value', querySnapShot => {
+      db.ref('users/'+querySnapShot.val()).once('value', querySnapShot2 => {
         var dict = querySnapShot2.val()
-        /*for (const [key, value] of Object.entries(dict)) {
-          console.log(value["oppurtunity"]);
-        }*/
+        if (dict != null){
+          for (var eventt in rows) {
+              var opp = rows[eventt]["Oppurtunity"]
+              console.log(opp)
+              if (dict[opp] != undefined){
+                rows[eventt]["signup"] = "Attending"
+                rows[eventt]["page"] = "contactus"
+                console.log(rows[eventt])
+              }else{
+                rows[eventt]["signup"] = "signup"
+                rows[eventt]["page"] = "vsignup"
+              }
+              this.setState({ items: rows})
+          }
+        }else{
 
+          for (var eventt in rows) {
+              var opp = rows[eventt]["Oppurtunity"]
+              rows[eventt]["signup"] = "signup"
+              rows[eventt]["page"] = "vsignup"
+              this.setState({ items: rows})
+            }
+        }
       });
     });
-
-
   });
-
   }
   //jsusser@urbanschool.org
   render(){
 
 const listItems = this.state.items
-console.log("hey" + this.state.key)
 
 
 
@@ -110,13 +129,21 @@ console.log("hey" + this.state.key)
         <Text style={styles.text}>Type: {item.Type}{"\n"}</Text>
         <Text style={styles.text}>Manager Name: {item.ManagerName}{"\n"}</Text>
         <Text style={styles.text}>Description: {item.Description}{"\n"}</Text>
-
+        {this.signedup(item)}
         <TouchableOpacity
-        style={styles.sectionContainer2}
-        onPress={() => this.props.navigation.navigate('vsignup', {
-          oppurtunity: item.Oppurtunity, date: item.Date, type: item.Type, managerName: item.ManagerName, description: item.Description
-        })}>
-        <Text style={styles.Text}>Signup</Text>
+        style={styles.button}
+        style={{
+        backgroundColor: this.color(item),
+        alignItems: 'center',
+        height:60,
+        width: 100,
+        marginLeft:20,
+        marginBottom: 10,
+        justifyContent: 'center',}}
+        onPress={() =>
+          this.send(item)
+          }>
+        <Text style={styles.Text}>{this.button(item)}</Text>
         </TouchableOpacity></View>)}
 
       </View>
@@ -136,15 +163,15 @@ const styles = StyleSheet.create({
   Text : {
     color: 'white',
     fontWeight:'bold',
+    textAlign: 'center',
   },
-  sectionContainer2 : {
+  button : {
       borderRadius: 0,
       alignItems: 'center',
       height:60,
       width: 100,
       marginLeft:20,
       marginBottom: 10,
-      backgroundColor: 'darkblue',
       justifyContent: 'center',
 
   },
@@ -161,10 +188,18 @@ const styles = StyleSheet.create({
     height:height,
     backgroundColor: 'white',
   },
+  signedup :{
+    fontSize: 17,
+    color: "orange",
+    fontWeight:'bold',
+    padding: 20,
+  },
   text: {
 
     fontSize: 15,
-    padding: 10,
+    paddingLeft: 10,
+    paddingBottom:0,
+    marginBottom: 0,
   }
 
 });

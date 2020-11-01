@@ -22,7 +22,8 @@ import React from 'react';
 
 import Screens from './screens/screens'
 class App extends React.Component {
-render() { return (
+render(
+  ) { return (
   <Screens />
   )
 }

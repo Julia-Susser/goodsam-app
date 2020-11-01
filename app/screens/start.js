@@ -45,7 +45,7 @@ export default class Start extends Component {
       }
   componentDidMount() {
 
-
+    
     async function Storage() {
       try {
 
