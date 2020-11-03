@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import date from 'date-and-time';
-import { Table, Row, Rows } from 'react-native-table-component'
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,8 +12,6 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import IconEntypo from 'react-native-vector-icons/Entypo'
 export default class Page2 extends Component{
   constructor(props) {
@@ -25,16 +22,13 @@ export default class Page2 extends Component{
   }
   caption = (item)=>{
     if (item.caption != undefined){return item.caption}
-
-
   }
+
   date = (item )=>{
     time = item.timestamp.split("+")[0]
     console.log(time)
-    datee = date.transform(time, 'YYYY-MM-DDTHH:mm:ss', 'MMMM D, YYYY');
-    return (
-      datee
-    )
+    date = date.transform(time, 'YYYY-MM-DDTHH:mm:ss', 'MMMM D, YYYY');
+    return (date)
   }
   componentDidMount() {
     fetch("https://graph.instagram.com/17841403749861133/media?fields=media_url,caption,timestamp&access_token=IGQVJXOG96cVhuUV9iSHZAYVHM3VE82OWs4eWJNT1dKUDhWUHBzd2hvZAmhIcXd3Sktwb1N4VVM2X3E1YWxaeTh6ZAU54bGF5VXp3VDA0c0g5akFtUmttRWs5WjQtdUpyQUtjbHZAEWkxR").then(response => response.json()).then(data => {
@@ -44,26 +38,28 @@ export default class Page2 extends Component{
 
   render(){
     return (
-      <SafeAreaView style={styles.body}>
-      <ScrollView>
-      <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
-         <IconEntypo name="chevron-thin-left" size={30}/>
-      </TouchableOpacity>
-      <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
-        <View style={styles.imgContainer}>
-          <Image style={styles.logo} source={require('./photos/logo1.png')}/>
-          <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
-        </View>
-      </TouchableOpacity>
-      <View>{this.state.items.map((item) =>
+<SafeAreaView style={styles.body}>
+  <ScrollView>
 
-          <View style={styles.box} key={item.id}><Image source={{uri: item.media_url}} style={styles.image}/><Text style={styles.cap}>{this.date(item)}{"\n"}{this.caption(item)}</Text></View>
-        )}
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('page-two')}>
+      <IconEntypo name="chevron-thin-left" size={30}/>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('page-two')}>
+      <View style={styles.imgContainer}>
+        <Image style={styles.logo} source={require('./photos/logo1.png')}/>
+        <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
       </View>
-      </ScrollView>
-      </SafeAreaView>
+    </TouchableOpacity>
+
+    <View>
+      {this.state.items.map((item) =>
+      <View style={styles.box} key={item.id}><Image source={{uri: item.media_url}} style={styles.image}/><Text style={styles.cap}>{this.date(item)}{"\n"}{this.caption(item)}</Text></View>
+      )}
+    </View>
+
+  </ScrollView>
+</SafeAreaView>
     )
   }
 }
@@ -77,17 +73,17 @@ const styles = StyleSheet.create({
   },
   logo : {
     width: width *.5,
-    height:30,
-    height:height*.1,
+    height:height*.06,
     resizeMode: 'contain',
     paddingBottom: 0,
+    marginTop:-20,
   },
   imgContainer: {
     alignItems:'center'
   },
   logo2 : {
     marginTop:0,
-    height:height*.1,
+    height:height*.06,
     width: width *.9,
     resizeMode: 'contain'
   },

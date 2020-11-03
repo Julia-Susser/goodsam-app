@@ -167,17 +167,17 @@ const styles = StyleSheet.create({
   },
   logo : {
     width: width *.5,
-    height:30,
-    height:height*.1,
+    height:height*.06,
     resizeMode: 'contain',
     paddingBottom: 0,
+    marginTop:-20,
   },
   imgContainer: {
     alignItems:'center'
   },
   logo2 : {
     marginTop:0,
-    height:height*.1,
+    height:height*.06,
     width: width *.9,
     resizeMode: 'contain'
   },

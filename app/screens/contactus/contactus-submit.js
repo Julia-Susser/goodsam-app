@@ -39,69 +39,46 @@ export default class Page2 extends Component{
 
   ){
     return (
-  <SafeAreaView style={styles.body}>
-      <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
-         <IconEntypo name="chevron-thin-left" size={30}/>
-      </TouchableOpacity>
-
-  <View>
-
-        <View style={styles.imgContainer}>
-            <Image style={styles.Image}
-          source={require('../photos/logo1.png')}
-          />
-
-          <Image style={styles.Image2}
-            source={require('../photos/logo2.png')}
-          />
-          <Text style={styles.welcome}> Thanks for submiting, {this.state.name}</Text>
-        </View>
+<SafeAreaView style={styles.body}>
+  <TouchableOpacity onPress={() => this.props.navigation.navigate('page-two')}>
+    <IconEntypo name="chevron-thin-left" size={30}/>
+  </TouchableOpacity>
 
 
+
+  <View style={styles.imgContainer}>
+    <Image style={styles.Image} source={require('../photos/logo1.png')}/>
+    <Image style={styles.Image2} source={require('../photos/logo2.png')}/>
+    <Text style={styles.welcome}> Thanks for submiting, {this.state.name}</Text>
   </View>
-  </SafeAreaView >
+
+  <TouchableOpacity style={[styles.Button, styles.donate]} onPress={() => Linking.openURL('https://goodsamfrc.org/donate/')}>
+    <Text style={styles.Text}>Donate</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={[styles.Button, styles.volunteer]} onPress={() => this.props.navigation.push('volunteer')}>
+    <Text style={styles.Text}>Volunteer</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={[styles.Button, styles.instagram]} onPress={() => this.props.navigation.push('instagram')}>
+    <Text style={styles.Text}>Instagram</Text>
+  </TouchableOpacity>
+
+
+</SafeAreaView >
     )
   }
 }
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
-  scrollView: {
-
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-
-  Text : {
-    color: 'white',
-    fontWeight:'bold',
-  },
-  or:{
-    marginTop: 25,
-    alignItems:'center'
-  },
-  Image : {
-    width: width *.5,
-    height:30,
-    height:height*.1,
-    resizeMode: 'contain',
-    paddingBottom: 0,
-  },
-  imgContainer: {
-    marginTop:width*.4,
-    alignItems:'center'
-  },
   welcome: {
     marginTop:height*.05,
-    fontSize: 30,
+    fontSize: 20,
     color:'#840404',
     fontWeight: "bold",
 
   },
-
   body: {
 
     height:height,
@@ -123,6 +100,32 @@ const styles = StyleSheet.create({
     height:height*.1,
     width: width *.9,
     resizeMode: 'contain'
+  },
+  Text : {
+    color: 'white',
+    fontWeight:'bold',
+  },
+  donate : {
+    backgroundColor: '#ffae42',
+
+  },
+  volunteer : {
+    backgroundColor: '#fb8c00',
+
+  },
+  instagram : {
+    backgroundColor: '#e65100',
+  },
+  Button : {
+      marginTop: 50,
+      borderRadius: 50,
+      alignItems: 'center',
+      marginLeft: width*.15,
+      height:50,
+      width: width * .7,
+      backgroundColor: 'orange',
+      justifyContent: 'center',
+
   },
 
 });

@@ -12,8 +12,6 @@ import {
   Dimensions,
 } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
-
-
 import {
   Header,
   LearnMoreLinks,
@@ -51,8 +49,8 @@ export default class Home extends Component {
 
       <View >
         <View style={styles.imgContainer}>
-          <Image style={styles.Image} source={require('./photos/logo1.png')}/>
-          <Image style={styles.Image2} source={require('./photos/logo2.png')}/>
+          <Image style={styles.Image} source={require('../photos/logo1.png')}/>
+          <Image style={styles.Image2} source={require('../photos/logo2.png')}/>
       </View>
         <TouchableOpacity
          style={styles.sectionContainer}

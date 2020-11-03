@@ -8,23 +8,29 @@ export default class Contactus extends Component {
     super(props);
 
     this.state = {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
       rname: "",
       remail: "",
+      changeName: false,
 
     };
   }
-  send = (name, email, subject, message) => {
-    const db = app.database();
-    db.ref('emails').push({
-      name: name,
-      email: email,
-      subject: subject,
-      message: message
-    })
+  startChangeName = () => {
+    this.setState({changeName: !this.state.changeName})
+  }
+  changeName = () => {
+    if (this.state.changeName){
+      return(
+    <View style={styles.view}>
+      <TextInput
+    style={styles.textInput}
+    autoCompleteType='username'
+    onChangeText={text => onChangeText(text)}
+    disableFullscreenUI={false}
+    keyboardType='default'
+    />
+    </View>)
+    }
+
   }
   componentDidMount() {
     var user = app.auth().currentUser;
@@ -35,7 +41,7 @@ export default class Contactus extends Component {
     }else{
 
     }
-    this.setState({ rname: name, remail: email, name: name, email: email})
+    this.setState({ rname: name, remail: email})
 
 
   }
@@ -44,64 +50,32 @@ export default class Contactus extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <SafeAreaView style={styles.body}>
-      <ScrollView>
-      <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
-         <IconEntypo name="chevron-thin-left" size={30}/>
-      </TouchableOpacity>
-      <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
-        <View style={styles.imgContainer}>
-          <Image style={styles.logo} source={require('./logo1.png')}/>
-          <Image style={styles.logo2} source={require('./logo2.png')}/>
-        </View>
-      </TouchableOpacity>
-      <Text style={styles.header}>Contact Us</Text>
-      <View style={styles.container}>
-      <View style={styles.view}>
+<SafeAreaView style={styles.body}>
+  <ScrollView>
 
-        <Text style={styles.title}>Name</Text>
-        <TextInput
-          value={this.state.name}
-          onChangeText={(name) => this.setState({ name })}
-          style={styles.input}
-        />
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('page-two')}>
+      <IconEntypo name="chevron-thin-left" size={30}/>
+    </TouchableOpacity>
 
-        <Text style={styles.title}>Email</Text>
-        <TextInput
-          value={this.state.email}
-          onChangeText={(email) => this.setState({ email })}
-          style={styles.input}
-        />
-
-        <Text style={styles.title}>Subject</Text>
-        <TextInput
-          value={this.state.subject}
-          onChangeText={(subject) => this.setState({ subject })}
-          multiline={false}
-          style={styles.input}
-        />
-
-        <Text style={styles.title}>Message</Text>
-        <TextInput
-          onChangeText={(message) => this.setState({ message })}
-          multiline={true}
-          style={styles.text}
-        />
-        </View>
-        <TouchableOpacity
-         style={styles.sectionContainer2}
-         onPress={() => {
-           const { name, email, subject, message} = this.state;
-           this.send(name, email, subject, message)
-           navigate('csubmit')
-           }}>
-         <Text style={styles.Text}>Send Message</Text>
-       </TouchableOpacity>
+    <TouchableOpacity onPress={() => this.props.navigation.navigate('page-two')}>
+      <View style={styles.imgContainer}>
+        <Image style={styles.logo} source={require('./photos/logo1.png')}/>
+        <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
       </View>
-      </ScrollView>
-      </SafeAreaView >
+    </TouchableOpacity>
+
+    <Text style={styles.header}>Settings</Text>
+
+    <View style={styles.container}>
+    <TouchableOpacity style={styles.Button} activeOpacity={1} onPress={() => { this.startChangeName() }}>
+      <Text style={styles.buttonText}>Change Your Name</Text>
+    </TouchableOpacity>
+
+    {this.changeName()}
+    </View>
+
+  </ScrollView>
+</SafeAreaView >
     );
   }
 }
@@ -146,7 +120,7 @@ const styles = StyleSheet.create({
     width:width*.85,
     height:60,
   },
-  text: {
+  textInput: {
     marginBottom: 20,
     borderWidth: 1,
     borderColor: 'gray',
@@ -154,28 +128,22 @@ const styles = StyleSheet.create({
     height:100,
     textAlignVertical: 'top',
   },
-  sectionContainer2 : {
-      borderRadius: 50,
+  Button : {
       alignItems: 'center',
       height:60,
       width: width * .7,
-      backgroundColor: 'darkblue',
+      backgroundColor: '#840404',
       justifyContent: 'center',
 
-  },
-  Text : {
-    color: 'white',
-    fontWeight:'bold',
   },
   body: {
     width:width,
     height:height,
     backgroundColor: 'white',
   },
-  inputext: {
-    textAlign:'center',
-    fontWeight:'bold',
-    borderWidth: 1,
-    borderColor: 'black',
-  },
+  buttonText : {
+    fontWeight: "bold",
+    color: "white"
+  }
+
 });
