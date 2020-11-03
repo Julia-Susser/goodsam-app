@@ -15,7 +15,7 @@ import {
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import IconEntypo from 'react-native-vector-icons/Entypo'
-import {app} from '../config';
+import {app} from '../../config';
 export default class Page2 extends Component{
 
   componentDidMount() {
@@ -49,11 +49,11 @@ export default class Page2 extends Component{
 
         <View style={styles.imgContainer}>
             <Image style={styles.Image}
-          source={require('./photos/logo1.png')}
+          source={require('../photos/logo1.png')}
           />
 
           <Image style={styles.Image2}
-            source={require('./photos/logo2.png')}
+            source={require('../photos/logo2.png')}
           />
           <Text style={styles.welcome}> Thanks for submiting, {this.state.name}</Text>
         </View>

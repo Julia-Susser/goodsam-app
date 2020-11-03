@@ -16,7 +16,7 @@ import {
 import  AsyncStorage  from '@react-native-community/async-storage';
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import {app} from '../config';
+import {app} from '../../config';
 import IconEntypo from 'react-native-vector-icons/Entypo'
 export default class Volunteer extends Component{
   constructor(props) {
@@ -123,8 +123,8 @@ const listItems = this.state.items
       <TouchableOpacity
        onPress={() => this.props.navigation.navigate('page-two')}>
         <View style={styles.imgContainer}>
-          <Image style={styles.logo} source={require('./photos/logo1.png')}/>
-          <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
+          <Image style={styles.logo} source={require('../photos/logo1.png')}/>
+          <Image style={styles.logo2} source={require('../photos/logo2.png')}/>
         </View>
       </TouchableOpacity>
       <View>

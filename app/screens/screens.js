@@ -12,15 +12,22 @@ import { createStackNavigator } from '@react-navigation/stack';
 import  AsyncStorage  from '@react-native-community/async-storage';
 
 import Page2 from './page-two'
-import Login from './login'
 import Home from './home'
-import Signup from './signup'
+
+import Login from './signIn/login'
+import Signup from './signIn/signup'
+
+
 import Start from './start'
-import Volunteer from './volunteer'
+
+import Volunteer from './volunteer/volunteer'
+import Vsignup from './volunteer/volunteer-signup'
+
 import Instagramm from './instagram'
-import Vsignup from './volunteer-signup'
-import Contactus from './contactus'
-import Csubmit from './contactus-submit'
+
+import Contactus from './contactus/contactus'
+import Csubmit from './contactus/contactus-submit'
+
 const Stack = createStackNavigator();
 
 class Screens extends React.Component {

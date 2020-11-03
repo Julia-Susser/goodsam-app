@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, TextInput, Dimensions,TouchableOpacity, SafeAreaView, ScrollView, Alert, Button, View, StyleSheet } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
-import {app} from '../config';
+import {app} from '../../config';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 export default class VolunteerSignUp extends Component {

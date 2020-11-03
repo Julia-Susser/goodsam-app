@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, TextInput, Dimensions,TouchableOpacity, SafeAreaView, Alert, Button, View, StyleSheet } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo'
 
-import {app} from '../config';
+import {app} from '../../config';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 export default class Login extends Component {

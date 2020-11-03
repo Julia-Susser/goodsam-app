@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, ScrollView, Image, TextInput, Dimensions,TouchableOpacity, SafeAreaView, Alert, Button, View, StyleSheet } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo'
 import Textarea from 'react-native-textarea';
-import {app} from '../config';
+import {app} from '../../config';
 export default class Contactus extends Component {
   constructor(props) {
     super(props);
@@ -53,8 +53,8 @@ export default class Contactus extends Component {
       <TouchableOpacity
        onPress={() => this.props.navigation.navigate('page-two')}>
         <View style={styles.imgContainer}>
-          <Image style={styles.logo} source={require('./photos/logo1.png')}/>
-          <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
+          <Image style={styles.logo} source={require('../photos/logo1.png')}/>
+          <Image style={styles.logo2} source={require('../photos/logo2.png')}/>
         </View>
       </TouchableOpacity>
       <Text style={styles.header}>Contact Us</Text>

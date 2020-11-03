@@ -3,7 +3,7 @@ import { Text, TextInput, Dimensions,TouchableOpacity, SafeAreaView, Alert, Butt
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import {app} from '../config';
+import {app} from '../../config';
 export default class Login extends Component {
   constructor(props) {
     super(props);
