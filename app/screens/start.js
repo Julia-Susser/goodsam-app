@@ -41,7 +41,7 @@ export default class Start extends Component {
     console.log(hey)
 
 
-    this.props.navigation.navigate('Home')
+    this.props.navigation.navigate('signInOptions')
 
       }
   componentDidMount() {

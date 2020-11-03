@@ -30,7 +30,7 @@ export default class Login extends Component {
       <SafeAreaView style={styles.body}>
 
       <TouchableOpacity
-       onPress={() => navigate('Home')}>
+       onPress={() => navigate('signInOptions')}>
          <IconEntypo name="chevron-thin-left" size={30}/>
       </TouchableOpacity>
       <Text style={styles.header}>Log In</Text>
@@ -57,7 +57,7 @@ export default class Login extends Component {
            const { email, password } = this.state;
 
            firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
-           navigate('page-two')
+           navigate('home')
 
            })
            .catch(function(error) {

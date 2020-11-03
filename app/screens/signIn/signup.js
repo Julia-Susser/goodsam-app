@@ -33,7 +33,7 @@ export default class Login extends Component {
       <SafeAreaView style={styles.body}>
 
       <TouchableOpacity
-       onPress={() => navigate('Home')}>
+       onPress={() => navigate('signInOptions')}>
          <IconAntDesign name="left" size={50}/>
       </TouchableOpacity>
       <Text style={styles.header}>Sign Up</Text>
@@ -76,7 +76,7 @@ export default class Login extends Component {
 
                 displayName: name,
               }).then(function() {
-                navigate('page-two')
+                navigate('home')
               }).catch(function(error) {
                 // An error happened.
               });

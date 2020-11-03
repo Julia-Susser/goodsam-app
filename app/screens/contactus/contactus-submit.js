@@ -40,7 +40,7 @@ export default class Page2 extends Component{
   ){
     return (
 <SafeAreaView style={styles.body}>
-  <TouchableOpacity onPress={() => this.props.navigation.navigate('page-two')}>
+  <TouchableOpacity onPress={() => this.props.navigation.navigate('home')}>
     <IconEntypo name="chevron-thin-left" size={30}/>
   </TouchableOpacity>
 

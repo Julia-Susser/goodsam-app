@@ -119,7 +119,7 @@ export default class VolunteerSignUp extends Component {
                  message: message
                })
              }
-             navigate("page-two")
+             navigate("home")
            });
           }}>
          <Text style={styles.Text}>Send Message</Text>

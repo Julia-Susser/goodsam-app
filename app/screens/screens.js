@@ -11,8 +11,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import  AsyncStorage  from '@react-native-community/async-storage';
 
-import Page2 from './page-two/page-two'
-import Home from './home'
+import Home from './home/home'
+
+import SignInOptions from './signIn/signInOptions'
 
 import Login from './signIn/login'
 import Signup from './signIn/signup'
@@ -48,8 +49,8 @@ render() {
     gestureEnabled: false
   }}>
           <Stack.Screen name="start" component={Start} />
-          <Stack.Screen name="Home" component={Home}/>
-          <Stack.Screen name="page-two" component={Page2} />
+          <Stack.Screen name="signInOptions" component={SignInOptions}/>
+          <Stack.Screen name="home" component={Home} />
           <Stack.Screen name="login" component={Login}/>
           <Stack.Screen name="signup" component={Signup} />
           <Stack.Screen name="settings" component={Settings} />

@@ -47,11 +47,11 @@ export default class Contactus extends Component {
       <SafeAreaView style={styles.body}>
       <ScrollView>
       <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
+       onPress={() => this.props.navigation.navigate('home')}>
          <IconEntypo name="chevron-thin-left" size={30}/>
       </TouchableOpacity>
       <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('page-two')}>
+       onPress={() => this.props.navigation.navigate('home')}>
         <View style={styles.imgContainer}>
           <Image style={styles.logo} source={require('../photos/logo1.png')}/>
           <Image style={styles.logo2} source={require('../photos/logo2.png')}/>

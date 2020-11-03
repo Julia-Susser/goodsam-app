@@ -19,8 +19,8 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 import IconSimple from 'react-native-vector-icons/SimpleLineIcons'
 import {app} from '../../config';
 import MenuDrawer from 'react-native-side-drawer'
-import styles from './page-two-css'
-export default class Page2 extends Component{
+import styles from './home-css'
+export default class Home extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -53,7 +53,7 @@ export default class Page2 extends Component{
           <Text style={styles.sidebar_first}>Settings</Text>
         </TouchableOpacity>
         <View style = {styles.lineStyle} />
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('signInOptions')}>
           <Text style={styles.sidebar}>LogOut</Text>
         </TouchableOpacity>
       </View>
