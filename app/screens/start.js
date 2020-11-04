@@ -37,26 +37,15 @@ export default class Start extends Component {
     };
   }
   login=async ()=>{
-    const hey = await AsyncStorage.getItem('token')
-    console.log(hey)
-
-
-    this.props.navigation.navigate('signInOptions')
-
-      }
+    const logged_in = await AsyncStorage.getItem('email')
+    if (logged_in != ""){
+      this.props.navigation.navigate('home')
+    }else{
+      this.props.navigation.navigate('signInOptions')
+    }
+    }
   componentDidMount() {
 
-
-    async function Storage() {
-      try {
-
-        await AsyncStorage.setItem('token', 'abc123')
-
-      } catch (err){
-        console.log(err)
-      }
-    }
-    //Storage()
     this.login()
   }
 
@@ -66,7 +55,6 @@ export default class Start extends Component {
     return (
   <SafeAreaView>
   </SafeAreaView >
-
     );
   }
 }

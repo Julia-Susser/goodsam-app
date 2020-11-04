@@ -90,7 +90,7 @@ export default class Volunteer extends Component{
                 rows[eventt]["signup"] = "signup"
                 rows[eventt]["page"] = "vsignup"
               }
-              this.setState({ items: rows})
+              home({ items: rows})
           }
         }else{
 
@@ -99,7 +99,7 @@ export default class Volunteer extends Component{
               rows[eventt]["signup"] = "signup"
               rows[eventt]["page"] = "vsignup"
               this.setState({ items: rows})
-            }
+            } 
         }
       });
     });

@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import { Text, TextInput, Dimensions,TouchableOpacity, SafeAreaView, Alert, Button, View, StyleSheet } from 'react-native';
-import IconEntypo from 'react-native-vector-icons/Entypo'
-import  AsyncStorage  from '@react-native-community/async-storage'
-import {app} from '../../config';
+import IconAntDesign from 'react-native-vector-icons/AntDesign'
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import styles from './login-css'
+import {app} from '../../../config';
+import styles from './signup-css'
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email: '',
       password: '',
 
     };
   }
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     const { navigate } = this.props.navigation;
@@ -33,22 +32,33 @@ export default class Login extends Component {
     return (
 <SafeAreaView style={styles.body}>
 
-  <TouchableOpacity style={{width: 40}} onPress={() => navigate('signInOptions')}>
-    <IconEntypo name="chevron-thin-left" size={30}/>
+  <TouchableOpacity onPress={() => navigate('signInOptions')}>
+    <IconAntDesign name="left" size={50}/>
   </TouchableOpacity>
-
-  <Text style={styles.header}>Log In</Text>
+  <Text style={styles.header}>Sign Up</Text>
   <View style={styles.container}>
+
+    <TextInput
+    value={this.state.name}
+    onChangeText={(name) => this.setState({ name })}
+    label='Name'
+    placeholder='  Name...'
+    style={styles.input}
+    />
+
     <TextInput
     value={this.state.email}
     onChangeText={(email) => this.setState({ email })}
-    placeholder="  Email..."
+    label='Email'
+    placeholder='  Email...'
     style={styles.input}
     />
+
     <TextInput
     value={this.state.password}
     onChangeText={(password) => this.setState({ password })}
-    placeholder="  Password..."
+    label='Password'
+    placeholder='  Password...'
     secureTextEntry={true}
     style={styles.input}
     />
@@ -56,18 +66,29 @@ export default class Login extends Component {
     <TouchableOpacity
     style={styles.sectionContainer2}
     onPress={() => {
-    const { email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
+    const { name, email, password } = this.state;
+    app.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
+    app.auth().signInWithEmailAndPassword(email, password).then(function(result) {
+    var user = firebase.auth().currentUser;
+    user.updateProfile({
+
+    displayName: name,
+    }).then(function() {
     navigate('home')
     saveLoginInfo(email, password)
+    }).catch(function(error) {});
     })
     .catch(function(error) {
     console.log("error")
     alert(error)
-    });}}>
+    })
+    }).catch(function(error) {
+    alert(error)
+    });
+
+    }}>
       <Text style={styles.Text}>Signup</Text>
     </TouchableOpacity>
-
   </View>
 </SafeAreaView >
     );

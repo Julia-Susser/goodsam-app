@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Text, TextInput, Dimensions,TouchableOpacity, SafeAreaView, ScrollView, Alert, Button, View, StyleSheet } from 'react-native';
+import { Text, Image, TextInput, Dimensions,TouchableOpacity, SafeAreaView, ScrollView, Alert, Button, View, StyleSheet } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
 import {app} from '../../config';
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import IconEntypo from 'react-native-vector-icons/Entypo'
 export default class VolunteerSignUp extends Component {
 
   constructor(props) {
@@ -49,18 +50,26 @@ export default class VolunteerSignUp extends Component {
       <ScrollView>
       <TouchableOpacity
       style={{width: 40}}
-       onPress={() => navigate('volunteer')}>
-         <IconAntDesign name="left" size={50}/>
+       onPress={() => this.props.navigation.navigate('home')}>
+         <IconEntypo name="chevron-thin-left" size={30}/>
       </TouchableOpacity>
-      <View style={styles.container}>
+      <TouchableOpacity
+       onPress={() => this.props.navigation.navigate('home')}>
+        <View style={styles.imgContainer}>
+          <Image style={styles.logo} source={require('../photos/logo1.png')}/>
+          <Image style={styles.logo2} source={require('../photos/logo2.png')}/>
+        </View>
+      </TouchableOpacity>
       <Text style={styles.header}>Sign up for {this.state.oppurtunity}</Text>
+      <Text>Date: {this.state.date}</Text>
+      <Text>Manager Name: {this.state.date}</Text>
+      <View style={styles.container}>
 
       <View style={{
         alignItems: 'center'
       }}>
       <View>
-      <Text>Date: {this.state.date}</Text>
-      <Text>Manager Name: {this.state.date}</Text>
+
       <Text>{this.state.description}</Text>
       </View>
       <View>
@@ -90,7 +99,11 @@ export default class VolunteerSignUp extends Component {
         <TouchableOpacity
          style={styles.sectionContainer2}
          onPress={() => {
+
            const { oppurtunity, date, description, name, email, phoneNumber, message, remail, rname } = this.state;
+           this.props.navigation.push("vsubmit", {
+           oppurtunity: oppurtunity}
+         )
            const db = firebase.database();
            var nemail = remail.split(".")[0]
            db.ref('userIds/'+nemail).once('value', function(snapshot) {
@@ -120,7 +133,8 @@ export default class VolunteerSignUp extends Component {
                  message: message
                })
              }
-             navigate("home")
+
+
            });
           }}>
          <Text style={styles.Text}>Send Message</Text>
@@ -136,6 +150,22 @@ export default class VolunteerSignUp extends Component {
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
+  logo : {
+    width: width *.5,
+    height:height*.06,
+    resizeMode: 'contain',
+    paddingBottom: 0,
+    marginTop:-20,
+  },
+  imgContainer: {
+    alignItems:'center'
+  },
+  logo2 : {
+    marginTop:0,
+    height:height*.06,
+    width: width *.9,
+    resizeMode: 'contain'
+  },
   container: {
 
     alignItems: 'center',

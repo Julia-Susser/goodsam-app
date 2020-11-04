@@ -96,7 +96,7 @@ export default class Contactus extends Component {
          onPress={() => {
            const { name, email, subject, message} = this.state;
            this.send(name, email, subject, message)
-           navigate('csubmit')
+           this.props.navigation.push("csubmit")
            }}>
          <Text style={styles.Text}>Send Message</Text>
        </TouchableOpacity>

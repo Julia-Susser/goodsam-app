@@ -16,13 +16,14 @@ import Home from './home/home'
 import SignInOptions from './signIn/signInOptions'
 
 import Login from './signIn/login'
-import Signup from './signIn/signup'
+import Signup from './signIn/signUp/signup'
 
 
 import Start from './start'
 
 import Volunteer from './volunteer/volunteer'
 import Vsignup from './volunteer/volunteer-signup'
+import Vsubmit from './volunteer/volunteer-submit'
 
 import Instagramm from './instagram'
 
@@ -59,6 +60,7 @@ render() {
           <Stack.Screen name="contactus" component={Contactus} />
           <Stack.Screen name="vsignup" component={Vsignup} />
           <Stack.Screen name="csubmit" component={Csubmit} />
+          <Stack.Screen name="vsubmit" component={Vsubmit} />
         </Stack.Navigator>
   </NavigationContainer>
   )
