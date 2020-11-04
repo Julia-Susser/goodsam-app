@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Text, ScrollView, Image, TextInput, Dimensions,TouchableOpacity, SafeAreaView, Alert, Button, View, StyleSheet } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo'
 import Textarea from 'react-native-textarea';
-import {app} from '../config';
+import {app} from '../../config';
+import styles from './settings-css'
 export default class Contactus extends Component {
   constructor(props) {
     super(props);
@@ -229,8 +230,8 @@ export default class Contactus extends Component {
 
     <TouchableOpacity onPress={() => this.props.navigation.navigate('home')}>
       <View style={styles.imgContainer}>
-        <Image style={styles.logo} source={require('./photos/logo1.png')}/>
-        <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
+        <Image style={styles.logo} source={require('../photos/logo1.png')}/>
+        <Image style={styles.logo2} source={require('../photos/logo2.png')}/>
       </View>
     </TouchableOpacity>
 
@@ -265,70 +266,3 @@ export default class Contactus extends Component {
     );
   }
 }
-
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  logo : {
-    width: width *.5,
-    height:height*.06,
-    resizeMode: 'contain',
-    paddingBottom: 0,
-    marginTop:-20,
-  },
-  imgContainer: {
-    alignItems:'center'
-  },
-  logo2 : {
-    marginTop:0,
-    height:height*.06,
-    width: width *.9,
-    resizeMode: 'contain'
-  },
-  header : {
-    marginTop:height*.0,
-    marginLeft: width*.07,
-    marginBottom: 10,
-    marginTop: 20,
-    color: '#840404',
-    fontWeight:'bold',
-    fontSize: 35,
-  },
-  input: {
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: 'gray',
-    width:width*.85,
-    height:60,
-  },
-  Button : {
-      alignItems: 'center',
-      height:60,
-      width: width * .7,
-      marginBottom: 20,
-      backgroundColor: '#840404',
-      justifyContent: 'center',
-  },
-  saveButton : {
-      alignItems: 'center',
-      height:60,
-      width: width * .4,
-      marginBottom: 20,
-      backgroundColor: '#fb8c00',
-      justifyContent: 'center',
-  },
-  body: {
-    width:width,
-    height:height,
-    backgroundColor: 'white',
-  },
-  buttonText : {
-    fontWeight: "bold",
-    color: "white"
-  }
-
-});

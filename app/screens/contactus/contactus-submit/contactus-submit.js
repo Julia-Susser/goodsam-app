@@ -15,7 +15,8 @@ import {
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import IconEntypo from 'react-native-vector-icons/Entypo'
-import {app} from '../../config';
+import {app} from '../../../config';
+import styles from './contactus-submit-css'
 export default class ContactusSubmit extends Component{
 
   componentDidMount() {
@@ -47,8 +48,8 @@ export default class ContactusSubmit extends Component{
 
 
   <View style={styles.imgContainer}>
-    <Image style={styles.Image} source={require('../photos/logo1.png')}/>
-    <Image style={styles.Image2} source={require('../photos/logo2.png')}/>
+    <Image style={styles.Image} source={require('../../photos/logo1.png')}/>
+    <Image style={styles.Image2} source={require('../../photos/logo2.png')}/>
     <Text style={styles.welcome}> Thanks for submiting, {this.state.name}</Text>
   </View>
 
@@ -69,63 +70,3 @@ export default class ContactusSubmit extends Component{
     )
   }
 }
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
-const styles = StyleSheet.create({
-  welcome: {
-    marginTop:height*.05,
-    fontSize: 20,
-    color:'#840404',
-    fontWeight: "bold",
-
-  },
-  body: {
-
-    height:height,
-    backgroundColor: 'white',
-  },
-  imgContainer: {
-
-    alignItems:'center'
-  },
-  Image : {
-    width: width *.5,
-    height:30,
-    height:height*.1,
-    resizeMode: 'contain',
-    paddingBottom: 0,
-  },
-  Image2 : {
-    marginTop:0,
-    height:height*.1,
-    width: width *.9,
-    resizeMode: 'contain'
-  },
-  Text : {
-    color: 'white',
-    fontWeight:'bold',
-  },
-  donate : {
-    backgroundColor: '#ffae42',
-
-  },
-  volunteer : {
-    backgroundColor: '#fb8c00',
-
-  },
-  instagram : {
-    backgroundColor: '#e65100',
-  },
-  Button : {
-      marginTop: 50,
-      borderRadius: 50,
-      alignItems: 'center',
-      marginLeft: width*.15,
-      height:50,
-      width: width * .7,
-      backgroundColor: 'orange',
-      justifyContent: 'center',
-
-  },
-
-});

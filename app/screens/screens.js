@@ -13,24 +13,24 @@ import  AsyncStorage  from '@react-native-community/async-storage';
 
 import Home from './home/home'
 
-import SignInOptions from './signIn/signInOptions'
+import SignInOptions from './signIn/signInHome/signInOptions'
 
-import Login from './signIn/login'
+import Login from './signIn/login/login'
 import Signup from './signIn/signUp/signup'
 
 
 import Start from './start'
 
-import Volunteer from './volunteer/volunteer'
-import Vsignup from './volunteer/volunteer-signup'
-import Vsubmit from './volunteer/volunteer-submit'
+import Volunteer from './volunteer/volunteer/volunteer'
+import Vsignup from './volunteer/volunteer-signup/volunteer-signup'
+import Vsubmit from './volunteer/volunteer-submit/volunteer-submit'
 
-import Instagramm from './instagram'
+import Instagramm from './instagram/instagram'
 
-import Settings from './settings'
+import Settings from './settings/settings'
 
-import Contactus from './contactus/contactus'
-import Csubmit from './contactus/contactus-submit'
+import Contactus from './contactus/contactus/contactus'
+import Csubmit from './contactus/contactus-submit/contactus-submit'
 
 const Stack = createStackNavigator();
 

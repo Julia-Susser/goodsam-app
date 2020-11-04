@@ -13,7 +13,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo'
-export default class Page2 extends Component{
+import styles from './instagram-css'
+export default class Instagram extends Component{
   constructor(props) {
     super(props);
     this.state = {
@@ -46,8 +47,8 @@ export default class Page2 extends Component{
 
     <TouchableOpacity onPress={() => this.props.navigation.navigate('home')}>
       <View style={styles.imgContainer}>
-        <Image style={styles.logo} source={require('./photos/logo1.png')}/>
-        <Image style={styles.logo2} source={require('./photos/logo2.png')}/>
+        <Image style={styles.logo} source={require('../photos/logo1.png')}/>
+        <Image style={styles.logo2} source={require('../photos/logo2.png')}/>
       </View>
     </TouchableOpacity>
 
@@ -62,53 +63,3 @@ export default class Page2 extends Component{
     )
   }
 }
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
-const styles = StyleSheet.create({
-  body: {
-
-    height:height,
-    backgroundColor: 'white',
-  },
-  logo : {
-    width: width *.5,
-    height:height*.06,
-    resizeMode: 'contain',
-    paddingBottom: 0,
-    marginTop:-20,
-  },
-  imgContainer: {
-    alignItems:'center'
-  },
-  logo2 : {
-    marginTop:0,
-    height:height*.06,
-    width: width *.9,
-    resizeMode: 'contain'
-  },
- image: {
-    // Setting up image width.
- width: width-41,
-
- // Setting up image height.
- height: height*.4,
-
-  },
-  scrollView: {
-
-  },
-  box:{
-      backgroundColor: '#fff',
-        borderRadius: 4,
-        borderWidth: 0.5,
-        borderColor: '#000',
-
-        margin: 20,
-},
-  cap:{
-    margin: 20,
-    color: "black",
-    fontSize: 20,
-
-}
-});

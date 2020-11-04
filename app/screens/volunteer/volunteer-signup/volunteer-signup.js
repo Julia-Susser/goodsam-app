@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Text, Image, TextInput, Dimensions,TouchableOpacity, SafeAreaView, ScrollView, Alert, Button, View, StyleSheet } from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign'
-import {app} from '../../config';
+import {app} from '../../../config';
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import IconEntypo from 'react-native-vector-icons/Entypo'
+import styles from './volunteer-signup-css'
 export default class VolunteerSignUp extends Component {
 
   constructor(props) {
@@ -56,8 +57,8 @@ export default class VolunteerSignUp extends Component {
       <TouchableOpacity
        onPress={() => this.props.navigation.navigate('home')}>
         <View style={styles.imgContainer}>
-          <Image style={styles.logo} source={require('../photos/logo1.png')}/>
-          <Image style={styles.logo2} source={require('../photos/logo2.png')}/>
+          <Image style={styles.logo} source={require('../../photos/logo1.png')}/>
+          <Image style={styles.logo2} source={require('../../photos/logo2.png')}/>
         </View>
       </TouchableOpacity>
       <Text style={styles.header}>Sign up for {this.state.oppurtunity}</Text>
@@ -146,80 +147,3 @@ export default class VolunteerSignUp extends Component {
     );
   }
 }
-
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
-const styles = StyleSheet.create({
-  logo : {
-    width: width *.5,
-    height:height*.06,
-    resizeMode: 'contain',
-    paddingBottom: 0,
-    marginTop:-20,
-  },
-  imgContainer: {
-    alignItems:'center'
-  },
-  logo2 : {
-    marginTop:0,
-    height:height*.06,
-    width: width *.9,
-    resizeMode: 'contain'
-  },
-  container: {
-
-    alignItems: 'center',
-
-  },
-
-  title: {
-
-  },
-  header : {
-    marginTop:height*.0,
-    marginLeft: width*.07,
-    marginBottom: 30,
-    color: 'orange',
-    fontWeight:'bold',
-    fontSize: 35,
-  },
-  input: {
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: 'gray',
-    width:width*.85,
-    height:60,
-  },
-  text: {
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: 'gray',
-    width:width*.85,
-    height:150,
-    textAlignVertical: 'top',
-  },
-  sectionContainer2 : {
-      borderRadius: 50,
-      alignItems: 'center',
-      height:60,
-      width: width * .7,
-      backgroundColor: 'darkblue',
-      justifyContent: 'center',
-
-  },
-  Text : {
-    color: 'white',
-    fontWeight:'bold',
-  },
-  body: {
-    width:width,
-    height:height,
-    backgroundColor: 'white',
-  },
-  inputext: {
-    textAlign:'center',
-    fontWeight:'bold',
-    borderWidth: 1,
-    borderColor: 'black',
-  },
-});
