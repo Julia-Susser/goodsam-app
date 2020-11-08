@@ -20,11 +20,12 @@ export default class Login extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    async function saveLoginInfo(name, email) {
+    async function saveLoginInfo(name, email, password) {
       try {
 
         await AsyncStorage.setItem('email', email)
         await AsyncStorage.setItem('name', name)
+        await AsyncStorage.setItem('password', password)
         console.log(name)
 
       } catch (err){
@@ -64,7 +65,7 @@ export default class Login extends Component {
         var name = user.displayName;
         var email = user.email;
     }
-    saveLoginInfo(name, email)
+    saveLoginInfo(name, email, password)
     navigate('home2', {name: name})
     })
     .catch(function(error) {

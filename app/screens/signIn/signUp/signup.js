@@ -5,6 +5,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import {app} from '../../../config';
 import styles from './signup-css'
+import  AsyncStorage  from '@react-native-community/async-storage';
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +20,12 @@ export default class Login extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    async function saveLoginInfo(name, email) {
+    async function saveLoginInfo(name, email, password) {
       try {
 
         await AsyncStorage.setItem('email', email)
         await AsyncStorage.setItem('name', name)
+        await AsyncStorage.setItem('password', password)
         console.log(name)
 
       } catch (err){
@@ -75,7 +77,7 @@ export default class Login extends Component {
 
     displayName: name,
     }).then(function() {
-      saveLoginInfo(name, email)
+      saveLoginInfo(name, email, password)
       navigate('home2', {name: name})
     }).catch(function(error) {});
     })

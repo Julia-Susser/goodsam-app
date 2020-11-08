@@ -3,6 +3,7 @@ import { Text, ScrollView, Image, TextInput, Dimensions,TouchableOpacity, SafeAr
 import IconEntypo from 'react-native-vector-icons/Entypo'
 import Textarea from 'react-native-textarea';
 import {app} from '../../../config';
+import  AsyncStorage  from '@react-native-community/async-storage';
 import styles from './contactus-css'
 export default class Contactus extends Component {
   constructor(props) {
@@ -27,22 +28,21 @@ export default class Contactus extends Component {
       message: message
     })
   }
+  getEmailName=async ()=>{
+      const email = await AsyncStorage.getItem('email')
+      const name = await AsyncStorage.getItem('name')
+      console.log(name)
+      this.setState({ rname: name, remail: email, name: name, email: email})
+      }
   componentDidMount() {
-    var user = app.auth().currentUser;
 
-    if (user != null) {
-      var name = user.displayName;
-      var email = user.email;
-    }else{
-
-    }
-    this.setState({ rname: name, remail: email, name: name, email: email})
-
+    this.getEmailName()
 
   }
 
   render() {
     const { navigate } = this.props.navigation;
+    console.log(this.state.email)
 
     return (
       <SafeAreaView style={styles.body}>

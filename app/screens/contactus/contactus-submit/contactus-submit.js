@@ -17,14 +17,17 @@ import 'firebase/auth'
 import IconEntypo from 'react-native-vector-icons/Entypo'
 import {app} from '../../../config';
 import styles from './contactus-submit-css'
+import  AsyncStorage  from '@react-native-community/async-storage';
 export default class ContactusSubmit extends Component{
-  getName=async ()=>{
-    const email = await AsyncStorage.getItem('email')
-    const name = await AsyncStorage.getItem('name')
-    this.setState({ name: name})
-    }
+  getEmailName=async ()=>{
+      const email = await AsyncStorage.getItem('email')
+      const name = await AsyncStorage.getItem('name')
+      console.log(name)
+      this.setState({ rname: name, remail: email, name: name, email: email})
+      }
+
   componentDidMount() {
-    this.getName()
+    this.getEmailName()
   }
   constructor(props) {
     super(props);

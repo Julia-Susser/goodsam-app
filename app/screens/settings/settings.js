@@ -5,7 +5,7 @@ import Textarea from 'react-native-textarea';
 import {app} from '../../config';
 import  AsyncStorage  from '@react-native-community/async-storage';
 import styles from './settings-css'
-export default class Contactus extends Component {
+export default class Settings extends Component {
   constructor(props) {
     super(props);
 
@@ -52,8 +52,13 @@ export default class Contactus extends Component {
       return(
     <View style={styles.container}>
     <View>
-    <Text>New Name for {this.state.rname}</Text>
-    <Text>New Name</Text>
+    <Text>Password for {this.state.remail}</Text>
+    <TextInput
+      onChangeText={(rpassword) => this.setState({ rpassword})}
+      style={styles.input}
+      secureTextEntry={true}
+    />
+    <Text>New Name for {this.rname}</Text>
       <TextInput
         onChangeText={(new_name1) => this.setState({ new_name1 })}
         style={styles.input}
@@ -151,10 +156,26 @@ export default class Contactus extends Component {
     }
     if (this.state.new_email1 === this.state.new_email2){
       var new_email = this.state.new_email1
+      var remail = this.state.remail
       app.auth().signInWithEmailAndPassword(this.state.remail, this.state.rpassword).then(function(result) {
         app.auth().currentUser.updateEmail(new_email).then(function() {
           alert("successfully changed email to " + new_email)
           saveNewEmail(new_email)
+
+          const db = app.database();
+          var old_email = remail.split(".")[0]
+          new_email = new_email.split(".")[0]
+          console.log(old_email)
+          db.ref('userIds/'+old_email).once('value', function(snapshot) {
+            var key = snapshot.val()
+            console.log(key)
+            if (key != null){
+              db.ref('userIds').update({[new_email]:key})
+            db.ref('userIds/'+old_email).remove()
+
+          }})
+
+
         }).catch(function(error) {
           console.log(error)
           alert(error)
@@ -171,11 +192,19 @@ export default class Contactus extends Component {
 
   }
   switchPassword = () => {
+    async function saveNewPassword(password) {
+      try {
+        await AsyncStorage.setItem('password', password)
+      } catch (err){
+        console.log(err)
+      }
+    }
     if (this.state.new_password1 === this.state.new_password2){
       var newPassword = this.state.new_password1
       app.auth().signInWithEmailAndPassword(this.state.remail, this.state.rpassword).then(function(result) {
         var user = app.auth().currentUser;
         user.updatePassword(newPassword).then(function() {
+          saveNewPassword()
           alert("Successfully changed password")
         }).catch(function(error) {
           alert(error)
@@ -188,6 +217,7 @@ export default class Contactus extends Component {
       alert("Emails do not match.")
     }
   }
+
   switchName = () => {
     async function saveNewName(name) {
       try {
@@ -197,17 +227,24 @@ export default class Contactus extends Component {
       }
     }
     if (this.state.new_name1 === this.state.new_name2){
-      var new_name = this.state.new_name1
-      var user = app.auth().currentUser;
-      user.updateProfile({
-        displayName: this.state.new_name1,
-      }).then(function() {
-        alert("Successfully changed name to "+new_name)
-        saveNewName(new_name)
+      var newName = this.state.new_name1
+      app.auth().signInWithEmailAndPassword(this.state.remail, this.state.rpassword).then(function(result) {
+        var user = app.auth().currentUser;
+        user.updateProfile({
+          displayName: newName,
+        }).then(function() {
+          saveNewName(newName)
+          alert("Successfully changed name to "+newName)
+        }).catch(function(error) {
+          alert(error)
+        });
       }).catch(function(error) {
         alert(error)
       });
       this.setState({ change: "Name Updated"})
+      this.setState({rname: newName})
+    }else{
+      alert("Names do not match.")
     }
   }
 
@@ -230,7 +267,9 @@ export default class Contactus extends Component {
 <SafeAreaView style={styles.body}>
   <ScrollView>
 
-    <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('home2', {name : this.state.rname})}>
+    <TouchableOpacity style={{width: 40}} onPress={() => {
+      this.props.navigation.navigate('home2', {name : this.state.rname})}
+    }>
       <IconEntypo name="chevron-thin-left" size={30}/>
     </TouchableOpacity>
 

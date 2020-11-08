@@ -13,14 +13,13 @@ export default class VolunteerSignUp extends Component {
     super(props);
 
 
-
     this.state = {
       oppurtunity: props.route.params.oppurtunity,
       date: props.route.params.date,
       managerName: props.route.params.managerName,
       type: props.route.params.type,
       description: props.route.params.description,
-      name: "",
+      name: "jj",
       email: "",
       phoneNumber: "",
       rname: "",
@@ -30,16 +29,16 @@ export default class VolunteerSignUp extends Component {
     };
   }
   getEmailName=async ()=>{
-    const email = await AsyncStorage.getItem('email')
-    const name = await AsyncStorage.getItem('name')
-    this.setState({ rname: name, remail: email, name: name, email: email})
-    }
+      const email = await AsyncStorage.getItem('email')
+      const name = await AsyncStorage.getItem('name')
+      console.log(name)
+      this.setState({ rname: name, remail: email, name: name, email: email})
+      }
   componentDidMount() {
 
     this.getEmailName()
 
   }
-
 
   render() {
 
