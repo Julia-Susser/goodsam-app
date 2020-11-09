@@ -56,8 +56,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fb8c00',
 
   },
-  instagram : {
+  contactus : {
     backgroundColor: '#e65100',
+  },
+  instagram : {
+    backgroundColor: '#840404',
   },
   Button : {
       marginTop: 50,

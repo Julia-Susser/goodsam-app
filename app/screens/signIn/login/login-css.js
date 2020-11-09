@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  forgot :{
+    marginTop: 30,
+    fontSize:20,
+  },
   header : {
     marginTop:height*.15,
     marginLeft: width*.07,

@@ -14,11 +14,13 @@ import {
 } from 'react-native';
 import IconEntypo from 'react-native-vector-icons/Entypo'
 import styles from './instagram-css'
+import {app} from '../../config';
 export default class Instagram extends Component{
   constructor(props) {
     super(props);
     this.state = {
-     items:[]
+     items:[],
+     token: "",
     };
   }
   caption = (item)=>{
@@ -30,14 +32,32 @@ export default class Instagram extends Component{
     var datee = date.transform(timee, 'YYYY-MM-DDTHH:mm:ss', 'MMMM D, YYYY');
     return (datee)
   }
+  get_token = () => {
+    const db = app.database();
+    db.ref('instagram').once('value')
+  .then((dataSnapshot) => {
+      this.setState({token: dataSnapshot})
+      console.log(dataSnapshot)
+   });
+   console.log(this.state.token)
+    return (this.state.token)
+  }
   componentDidMount() {
-    fetch("https://graph.instagram.com/17841403749861133/media?fields=media_url,caption,timestamp&access_token=IGQVJXOG96cVhuUV9iSHZAYVHM3VE82OWs4eWJNT1dKUDhWUHBzd2hvZAmhIcXd3Sktwb1N4VVM2X3E1YWxaeTh6ZAU54bGF5VXp3VDA0c0g5akFtUmttRWs5WjQtdUpyQUtjbHZAEWkxR").then(response => response.json()).then(data => {
+
+
+    const db = app.database();
+    db.ref('instagram').once('value')
+  .then((dataSnapshot) => {
+    fetch("https://graph.instagram.com/"+dataSnapshot.val()+"/media?fields=media_url,caption,timestamp&access_token=IGQVJXOG96cVhuUV9iSHZAYVHM3VE82OWs4eWJNT1dKUDhWUHBzd2hvZAmhIcXd3Sktwb1N4VVM2X3E1YWxaeTh6ZAU54bGF5VXp3VDA0c0g5akFtUmttRWs5WjQtdUpyQUtjbHZAEWkxR").then(response => response.json()).then(data => {
       this.setState({ items: data["data"]})
     });
+  })
   }
 
   render(){
+
     return (
+
 <SafeAreaView style={styles.body}>
   <ScrollView>
 

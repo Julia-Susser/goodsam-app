@@ -309,7 +309,7 @@ export default class Settings extends Component {
     </View>
 
     {this.setForm()}
-
+    <Text style={styles.margin}></Text>
   </ScrollView>
 </SafeAreaView >
     );

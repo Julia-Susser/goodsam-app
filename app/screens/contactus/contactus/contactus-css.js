@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  margin:{
+    marginBottom:height*.4,
+  },
   logo : {
     width: width *.5,
     height:height*.06,

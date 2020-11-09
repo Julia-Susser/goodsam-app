@@ -84,6 +84,7 @@ export default class Home extends Component{
 
     return (
 
+
 <MenuDrawer
 open={this.state.open}
 drawerContent={this.drawerContent()}
@@ -94,7 +95,8 @@ opacity={0.4}
 >
   <SafeAreaView>
 
-
+  <ScrollView>
+    
     <TouchableOpacity onPress={this.toggleClose} activeOpacity={1}>
       <View style={styles.body}>
 
@@ -125,8 +127,10 @@ opacity={0.4}
 
       </View>
     </TouchableOpacity>
+    </ScrollView>
   </SafeAreaView>
 </MenuDrawer>
+
 
     )
   }

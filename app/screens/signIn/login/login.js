@@ -12,12 +12,35 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      sent: false,
 
     };
   }
   componentDidMount() {
   }
-
+  forgotPassword = () =>{
+    var email = this.state.email
+    app.auth().sendPasswordResetEmail(email).then(function() {
+      alert("Sent Reset Password Link to " +email)
+    }).catch(function(error) {
+      alert("Could not send Reset Password Link to " +email + "\n"+error)
+    });
+    this.setState({sent:true})
+  }
+  resetText1 = () =>{
+    if (!this.state.sent){
+    return("Forgot your ")
+  }else{
+    return("Didn't Recieve an email? ")
+  }
+  }
+  resetText2 = () =>{
+    if (!this.state.sent){
+    return("password?")
+  }else{
+    return("Send Again.")
+  }
+}
   render() {
     const { navigate } = this.props.navigation;
     async function saveLoginInfo(name, email, password) {
@@ -55,6 +78,7 @@ export default class Login extends Component {
     style={styles.input}
     />
 
+
     <TouchableOpacity
     style={styles.sectionContainer2}
     onPress={() => {
@@ -74,7 +98,14 @@ export default class Login extends Component {
     });}}>
       <Text style={styles.Text}>Signup</Text>
     </TouchableOpacity>
+    <TouchableOpacity onPress={() => {this.forgotPassword()}}>
+    <Text style={styles.forgot}> {this.resetText1()}
 
+        <Text style={{textDecorationLine: 'underline',}}>{this.resetText2()}</Text>
+
+    </Text>
+    </TouchableOpacity>
+    
   </View>
 </SafeAreaView >
     );

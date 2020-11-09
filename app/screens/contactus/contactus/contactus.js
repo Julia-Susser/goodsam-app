@@ -101,6 +101,7 @@ export default class Contactus extends Component {
            }}>
          <Text style={styles.Text}>Send Message</Text>
        </TouchableOpacity>
+       <Text style={styles.margin}></Text>
       </View>
       </ScrollView>
       </SafeAreaView >

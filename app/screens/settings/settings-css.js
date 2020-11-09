@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  margin:{
+    marginBottom:height*.4,
+  },
   logo : {
     width: width *.5,
     height:height*.06,
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'gray',
     width:width*.85,
-    height:40,
+    height:60,
   },
   Button : {
       alignItems: 'center',

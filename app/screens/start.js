@@ -34,6 +34,11 @@ export default class Start extends Component {
     const password = await AsyncStorage.getItem('password')
     if (logged_in != null){
     app.auth().signInWithEmailAndPassword(logged_in, "Jsusser3").then(function(result) {
+      var user = app.auth().currentUser;
+      if (user != null) {
+          var name = user.displayName;
+          var email = user.email;
+      }
       navigate('home2', {name: name})
       })
       .catch(function(error) {
@@ -47,6 +52,7 @@ export default class Start extends Component {
   componentDidMount() {
 
     this.login()
+
   }
 
   render() {
@@ -54,6 +60,7 @@ export default class Start extends Component {
 
     return (
   <SafeAreaView>
+
   </SafeAreaView >
     );
   }

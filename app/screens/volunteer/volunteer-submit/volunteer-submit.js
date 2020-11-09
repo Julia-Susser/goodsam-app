@@ -39,29 +39,39 @@ export default class ContactusSubmit extends Component{
   ){
     return (
 <SafeAreaView style={styles.body}>
+<ScrollView>
+
   <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('home2')}>
     <IconEntypo name="chevron-thin-left" size={30}/>
   </TouchableOpacity>
 
 
-
+  <TouchableOpacity
+   onPress={() => this.props.navigation.navigate('home2')}>
   <View style={styles.imgContainer}>
     <Image style={styles.Image} source={require('../../photos/logo1.png')}/>
     <Image style={styles.Image2} source={require('../../photos/logo2.png')}/>
     <Text style={styles.welcome}> Thanks for submiting, {this.state.name}</Text>
   </View>
+  </TouchableOpacity>
 
   <TouchableOpacity style={[styles.Button, styles.donate]} onPress={() => Linking.openURL('https://goodsamfrc.org/donate/')}>
     <Text style={styles.Text}>Donate</Text>
   </TouchableOpacity>
 
-  <TouchableOpacity style={[styles.Button, styles.volunteer]} onPress={() => this.props.navigation.push('contactus')}>
-    <Text style={styles.Text}>Contact Us</Text>
+  <TouchableOpacity style={[styles.Button, styles.volunteer]} onPress={() => this.props.navigation.push('volunteer')}>
+    <Text style={styles.Text}>Volunteer</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity style={[styles.Button, styles.contactus]} onPress={() => this.props.navigation.push('contactus')}>
+    <Text style={styles.Text}>ContactUs</Text>
   </TouchableOpacity>
 
   <TouchableOpacity style={[styles.Button, styles.instagram]} onPress={() => this.props.navigation.push('instagram')}>
     <Text style={styles.Text}>Instagram</Text>
   </TouchableOpacity>
+
+</ScrollView>
 
 
 </SafeAreaView >

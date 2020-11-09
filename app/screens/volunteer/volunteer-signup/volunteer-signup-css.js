@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     marginTop:-20,
   },
+  margin:{
+    marginBottom:height*.4,
+  },
   imgContainer: {
     alignItems:'center'
   },
