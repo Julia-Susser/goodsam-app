@@ -15,6 +15,7 @@ import {
 import IconEntypo from 'react-native-vector-icons/Entypo'
 import styles from './instagram-css'
 import {app} from '../../config';
+
 export default class Instagram extends Component{
   constructor(props) {
     super(props);
