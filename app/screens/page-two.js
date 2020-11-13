@@ -12,7 +12,7 @@ import {
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-
+"Julia Rules"
 export default class Page2 extends Component{
   componentDidMount() {
   }
