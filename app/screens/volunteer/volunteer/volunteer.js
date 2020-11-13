@@ -141,15 +141,9 @@ const listItems = this.state.items
         <Text style={styles.text}>Description: {item.Description}{"\n"}</Text>
         {this.signedup(item)}
         <TouchableOpacity
-        style={styles.button}
-        style={{
+        style={[{
         backgroundColor: this.color(item),
-        alignItems: 'center',
-        height:60,
-        width: 100,
-        marginLeft:20,
-        marginBottom: 10,
-        justifyContent: 'center',}}
+      }, styles.button]}
         onPress={() =>
           this.send(item)
           }>

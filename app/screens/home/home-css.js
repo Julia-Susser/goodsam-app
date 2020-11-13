@@ -11,8 +11,14 @@ import {
   StatusBar,
   TouchableOpacity,
   Dimensions,
+  PixelRatio,
 } from 'react-native';
-
+if (PixelRatio.get() <= 2) {
+  font = 20;
+}else{
+  font = 30
+}
+console.log(font)
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
@@ -25,14 +31,14 @@ const styles = StyleSheet.create({
   },
   sidebar_first : {
     color: "white",
-    fontSize:35,
+    fontSize:30,
     marginLeft: 10,
     marginTop: height*.07,
 
   },
   sidebar : {
     color: "white",
-    fontSize:35,
+    fontSize:30,
     marginLeft: 10,
     marginTop: 10,
   },
@@ -48,7 +54,8 @@ const styles = StyleSheet.create({
   },
   welcome: {
     marginTop:height*.05,
-    fontSize: 30,
+    fontSize: font,
+
     color:'#840404',
     fontWeight: "bold",
 
