@@ -12,6 +12,7 @@ import {
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
+
 export default class Page2 extends Component{
   componentDidMount() {
   }
