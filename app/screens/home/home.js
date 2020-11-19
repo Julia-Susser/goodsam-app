@@ -28,12 +28,12 @@ export default class Home extends Component{
      name:'',
      open: false,
      email: 'nope',
-     num: true,
-     namey: props.route.params.name,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getEmailName()
+  }
 
   logout = async() => {
     try {
@@ -43,13 +43,25 @@ export default class Home extends Component{
       console.log(err)
     }
   }
-
+  getEmailName=async ()=>{
+    const email = await AsyncStorage.getItem('email')
+    const name = await AsyncStorage.getItem('name')
+    console.log(name)
+    this.setState({ name: name})
+    }
   toggleOpen = () => {
     this.setState({ open: !this.state.open });
   };
   toggleClose = () => {
     this.setState({ open: false });
   };
+  name = (hey) => {
+    if (this.props.route.params===undefined){
+      return this.state.name
+    }else{
+      return this.props.route.params.name
+    }
+  }
 
   drawerContent = () => {
     return (
@@ -96,7 +108,7 @@ opacity={0.4}
   <SafeAreaView>
 
   <ScrollView>
-    
+
     <TouchableOpacity onPress={this.toggleClose} activeOpacity={1}>
       <View style={styles.body}>
 
@@ -107,7 +119,7 @@ opacity={0.4}
         <View style={styles.imgContainer}>
           <Image style={styles.Image} source={require('../photos/logo1.png')}/>
           <Image style={styles.Image2} source={require('../photos/logo2.png')}/>
-          <Text style={styles.welcome}> Welcome {this.props.route.params.name} </Text>
+          <Text style={styles.welcome}> Welcome {this.name()} </Text>
         </View>
         <TouchableOpacity style={[styles.Button, styles.donate]} onPress={() => Linking.openURL('https://goodsamfrc.org/donate/')}>
           <Text style={styles.Text}>Donate</Text>

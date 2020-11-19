@@ -28,7 +28,7 @@ export default class Start extends Component {
     super(props);
   }
   login=async ()=>{
-    const { navigate } = this.props.navigation;
+    const { push } = this.props.navigation;
     const logged_in = await AsyncStorage.getItem('email')
     const name = await AsyncStorage.getItem('name')
     const password = await AsyncStorage.getItem('password')
@@ -39,10 +39,10 @@ export default class Start extends Component {
           var name = user.displayName;
           var email = user.email;
       }
-      navigate('home2', {name: name})
+      push('home2')
       })
       .catch(function(error) {
-      navigate('signInOptions')
+      push('signInOptions')
       });
 
     }else{

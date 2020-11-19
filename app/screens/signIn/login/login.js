@@ -42,7 +42,7 @@ export default class Login extends Component {
   }
 }
   render() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     async function saveLoginInfo(name, email, password) {
       try {
 
@@ -58,7 +58,7 @@ export default class Login extends Component {
     return (
 <SafeAreaView style={styles.body}>
   <ScrollView>
-  <TouchableOpacity style={{width: 40}} onPress={() => navigate('signInOptions')}>
+  <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('signInOptions', {name: this.state.name})}>
     <IconEntypo name="chevron-thin-left" size={30}/>
   </TouchableOpacity>
 
@@ -90,7 +90,7 @@ export default class Login extends Component {
         var email = user.email;
     }
     saveLoginInfo(name, email, password)
-    navigate('home2', {name: name})
+    navigation.push('home2')
     })
     .catch(function(error) {
     console.log("error")

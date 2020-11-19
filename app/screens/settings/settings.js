@@ -242,7 +242,6 @@ export default class Settings extends Component {
         alert(error)
       });
       this.setState({ change: "Name Updated"})
-      this.setState({rname: newName})
     }else{
       alert("Names do not match.")
     }
@@ -254,6 +253,12 @@ export default class Settings extends Component {
     const email = await AsyncStorage.getItem('email')
     const name = await AsyncStorage.getItem('name')
     this.setState({ rname: name, remail: email, name: name, email: email})
+    }
+  send=async ()=>{
+    const email = await AsyncStorage.getItem('email')
+    const name = await AsyncStorage.getItem('name')
+    this.props.navigation.navigate('home2', {name: name})
+
     }
   componentDidMount() {
     this.getEmailName()
@@ -268,12 +273,14 @@ export default class Settings extends Component {
   <ScrollView>
 
     <TouchableOpacity style={{width: 40}} onPress={() => {
-      this.props.navigation.navigate('home2', {name : this.state.rname})}
+      this.send()
+      }
     }>
       <IconEntypo name="chevron-thin-left" size={30}/>
     </TouchableOpacity>
 
-    <TouchableOpacity onPress={() => this.props.navigation.navigate('home2', {name : this.state.rname})}>
+    <TouchableOpacity onPress={() => {
+      this.send()}}>
       <View style={styles.imgContainer}>
         <Image style={styles.logo} source={require('../photos/logo1.png')}/>
         <Image style={styles.logo2} source={require('../photos/logo2.png')}/>

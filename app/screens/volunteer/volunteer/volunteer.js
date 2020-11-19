@@ -82,7 +82,7 @@ export default class Volunteer extends Component{
               var opp = rows[eventt]["Opportunity"]
               var date = rows[eventt]["Date"]
               if (date === undefined){
-                date
+                date = ""
               }
               opp = opp+"_"+date
               console.log(opp)

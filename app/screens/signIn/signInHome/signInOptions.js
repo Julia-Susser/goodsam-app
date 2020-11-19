@@ -23,6 +23,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import styles from './signInOptions-css'
+
 export default class Home extends Component {
 
   constructor(props) {
@@ -39,10 +40,13 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+
   }
 
-  render() {
-    const { navigate } = this.props.navigation;
+  render()
+
+  {
+
 
     return (
 <SafeAreaView style={styles.body}>
