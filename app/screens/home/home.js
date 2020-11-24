@@ -132,7 +132,7 @@ export default class Home extends Component{
 console.log(this.state.name)
 
 
-
+  if (this.state.logged_in != null && this.state.logged_in != ''){
     return (
 
 
@@ -145,7 +145,7 @@ overlay={true}
 opacity={0.4}
 >
   <SafeAreaView>
-{this.state.logged_in != null && this.state.logged_in != '' &&
+
   <ScrollView>
 
     <TouchableOpacity onPress={this.toggleClose} activeOpacity={1}>
@@ -179,8 +179,20 @@ opacity={0.4}
       </View>
     </TouchableOpacity>
     </ScrollView>
-  }
-  {this.state.logged_in === null &&
+
+
+
+
+
+
+  </SafeAreaView>
+</MenuDrawer>
+
+
+    )
+  }else if (this.state.logged_in === null){
+    return(
+
     <View style={styles.body}>
     <View style={styles_restart.imgContainer}>
       <Image style={styles_restart.Image} source={require('../photos/logo1.png')}/>
@@ -199,14 +211,12 @@ opacity={0.4}
       <Text style={styles_restart.Text}>Signup</Text>
     </TouchableOpacity>
     </View>
-  }
-
-
-
-  </SafeAreaView>
-</MenuDrawer>
-
-
-    )
+  )
+}else{
+  return(
+    <SafeAreaView style={styles.body}>
+    </SafeAreaView>
+  )
+}
   }
 }

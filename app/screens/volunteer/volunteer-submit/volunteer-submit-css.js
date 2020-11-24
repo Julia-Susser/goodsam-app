@@ -22,6 +22,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
 
   },
+  welcome2: {
+    
+    fontSize: 20,
+    color:'#840404',
+    fontWeight: "bold",
+
+  },
   body: {
 
     height:height,

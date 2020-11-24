@@ -154,7 +154,7 @@ export default class Settings extends Component {
         console.log(err)
       }
     }
-    if (this.state.new_email1 === this.state.new_email2){
+    if (this.state.new_email1.toLowerCase() === this.state.new_email2.toLowerCase()){
       var new_email = this.state.new_email1
       var remail = this.state.remail
       app.auth().signInWithEmailAndPassword(this.state.remail, this.state.rpassword).then(function(result) {
@@ -163,8 +163,8 @@ export default class Settings extends Component {
           saveNewEmail(new_email)
 
           const db = app.database();
-          var old_email = remail.split(".")[0]
-          new_email = new_email.split(".")[0]
+          var old_email = remail.split(".")[0].toLowerCase()
+          new_email = new_email.split(".")[0].toLowerCase()
           console.log(old_email)
           db.ref('userIds/'+old_email).once('value', function(snapshot) {
             var key = snapshot.val()
@@ -260,6 +260,14 @@ export default class Settings extends Component {
     this.props.navigation.navigate('home2', {name: name})
 
     }
+    logout = async() => {
+      try {
+        await AsyncStorage.setItem('email', '')
+        await AsyncStorage.setItem('name', '')
+      } catch (err){
+
+      }
+    }
   componentDidMount() {
     this.getEmailName()
 
@@ -308,9 +316,8 @@ export default class Settings extends Component {
     app.auth().signOut().then(function() {
     }).catch(function(error) {
     });
-    this.setState({open: false})
     this.logout()
-    this.props.navigation.navigate('signInOptions') }}>
+    this.props.navigation.push('home2') }}>
       <Text style={styles.buttonText}>LogOut</Text>
     </TouchableOpacity>
     </View>

@@ -19,24 +19,15 @@ export default class Contactus extends Component {
 
     };
   }
-  send (name, email, subject, message) {
-    const db = app.database()
-    if (subject != "" && message != ""){
-      db.ref('emails').push({
-        name: name,
-        email: email,
-        subject: subject,
-        message: message
-      })
-      this.props.navigation.push("csubmit")
-  }else if (subject === "" && message === "") {
-    alert("Please enter Subject and Message.")
-  }else if (subject === ""){
-    alert("Please enter Subject.")
-  }else{
-    alert("Please enter Message.")
+  send = (name, email, subject, message) => {
+    const db = app.database();
+    db.ref('emails').push({
+      name: name,
+      email: email,
+      subject: subject,
+      message: message
+    })
   }
-}
   getEmailName=async ()=>{
       const email = await AsyncStorage.getItem('email')
       const name = await AsyncStorage.getItem('name')
@@ -92,7 +83,6 @@ export default class Contactus extends Component {
           onChangeText={(subject) => this.setState({ subject })}
           multiline={false}
           style={styles.input}
-          maxLength={60}
         />
 
         <Text style={styles.title}>Message</Text>
@@ -107,7 +97,7 @@ export default class Contactus extends Component {
          onPress={() => {
            const { name, email, subject, message} = this.state;
            this.send(name, email, subject, message)
-
+           this.props.navigation.push("csubmit")
            }}>
          <Text style={styles.Text}>Send Message</Text>
        </TouchableOpacity>

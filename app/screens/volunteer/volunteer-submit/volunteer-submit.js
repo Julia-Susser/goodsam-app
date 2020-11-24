@@ -30,7 +30,7 @@ export default class ContactusSubmit extends Component{
   constructor(props) {
     super(props);
     this.state = {
-    opportunity: props.route.params.Opportunity,
+    opportunity: props.route.params.opportunity,
      name:""
     };
   }
@@ -51,7 +51,8 @@ export default class ContactusSubmit extends Component{
   <View style={styles.imgContainer}>
     <Image style={styles.Image} source={require('../../photos/logo1.png')}/>
     <Image style={styles.Image2} source={require('../../photos/logo2.png')}/>
-    <Text style={styles.welcome}> Thanks for submiting, {this.state.name}</Text>
+    <Text style={styles.welcome}>Thanks for volunteering for {this.state.opportunity},</Text>
+    <Text style={styles.welcome2}>{this.state.name}</Text>
   </View>
   </TouchableOpacity>
 

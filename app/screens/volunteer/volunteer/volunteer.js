@@ -41,7 +41,7 @@ export default class Volunteer extends Component{
       const email = await AsyncStorage.getItem('email')
 
       const db = firebase.database();
-      var nemail = email.split(".")[0]
+      var nemail = email.split(".")[0].toLowerCase()
       console.log(nemail)
 
       db.ref('userIds/'+nemail).once('value', querySnapShot => {
@@ -54,8 +54,10 @@ export default class Volunteer extends Component{
 
       }
   componentDidMount() {
-    this.getEmail()
-    fetch("https://sheets.googleapis.com/v4/spreadsheets/1qb3nY8_7PmjFfU1a6aJfYKS9AEV9Q1VXVc8WL0Mc6EE/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=AIzaSyAmwRJCnSaR3nv-jl24zsvZbUxzZhbbLkQ").then(response => response.json()).then(data => {
+this.getEmail()
+const db = firebase.database();
+db.ref('sheet_id/').once('value', querySnapShot => {
+  fetch("https://sheets.googleapis.com/v4/spreadsheets/"+querySnapShot.val()+"/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=AIzaSyAmwRJCnSaR3nv-jl24zsvZbUxzZhbbLkQ").then(response => response.json()).then(data => {
   let batchRowValues = data.valueRanges[0].values;
   const rows = [];
   for (let i = 1; i < batchRowValues.length; i++) {
@@ -67,6 +69,7 @@ export default class Volunteer extends Component{
   }
   this.setState({ items: rows})
   });
+})
   this.firebase()
   }
   signedup = (item, dict) => {
@@ -94,10 +97,9 @@ check = (item,dict) => {
         date = ''
       }
       opp = opp+"_"+date
-      console.log(opp)
-      console.log(dict[opp])
+      return(dict[opp])
     }
-    return(dict[opp])
+    return(undefined)
   }
 send = (item,dict)=>{
   if (this.check(item,dict) != undefined){
@@ -106,7 +108,7 @@ send = (item,dict)=>{
   }else{
     this.props.navigation.push(
       "vsignup", {
-    opportunity: item.Opportunity, date: item.Date, type: item.Type, managerName: item.ManagerName, description: item.Description})
+    opportunity: item.Opportunity, date: item.Date, type: item.Type, managerName: item.ManagerName, managerEmail: item.ManagerEmail, description: item.Description})
   }
   }
   render(){

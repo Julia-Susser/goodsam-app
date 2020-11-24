@@ -775,7 +775,7 @@
 				CODE_SIGN_ENTITLEMENTS = goodsam_app/goodsam_appDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 79PA772M23;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = goodsam_app/Info.plist;
@@ -800,7 +800,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 79PA772M23;
 				INFOPLIST_FILE = goodsam_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

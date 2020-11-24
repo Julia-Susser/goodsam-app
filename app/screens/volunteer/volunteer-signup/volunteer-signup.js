@@ -18,9 +18,10 @@ export default class VolunteerSignUp extends Component {
       opportunity: props.route.params.opportunity,
       date: props.route.params.date,
       managerName: props.route.params.managerName,
+      managerEmail: props.route.params.managerEmail,
       type: props.route.params.type,
       description: props.route.params.description,
-      name: "jj",
+      name: "",
       email: "",
       phoneNumber: "",
       rname: "",
@@ -35,15 +36,10 @@ export default class VolunteerSignUp extends Component {
       console.log(name)
       this.setState({ rname: name, remail: email, name: name, email: email})
       }
-  send = (name, email, opportunity, date, managerName, message) => {
+  send = (opportunity) => {
     const db = app.database();
     db.ref('volunteer-signup').push({
-      name: name,
-      email: email,
       opportunity: opportunity,
-      date: date,
-      managerName: managerName,
-      message: message,
     })
   }
   componentDidMount() {
@@ -79,10 +75,7 @@ export default class VolunteerSignUp extends Component {
       <View style={{
         alignItems: 'center'
       }}>
-      <View>
 
-      <Text>{this.state.description}</Text>
-      </View>
       <View>
       <Text style={styles.title}>Name</Text>
       <TextInput
@@ -121,7 +114,7 @@ export default class VolunteerSignUp extends Component {
          style={styles.sectionContainer2}
          onPress={() => {
 
-          var { opportunity, date, managerName, description, name, email, phoneNumber, message, remail, rname } = this.state;
+          var { opportunity, date, managerName, managerEmail, description, name, email, phoneNumber, message, remail, rname } = this.state;
 
          console.log(opportunity)
          if (date === undefined){
@@ -134,7 +127,7 @@ export default class VolunteerSignUp extends Component {
            alert("Please enter valid Phone Number")
          }
          const db = firebase.database();
-         var nemail = remail.split(".")[0]
+         var nemail = remail.split(".")[0].toLowerCase()
          if (phoneNumber.length >= 10){
          db.ref('userIds/'+nemail).once('value', function(snapshot) {
            var key = snapshot.val()
@@ -146,7 +139,8 @@ export default class VolunteerSignUp extends Component {
                name: name,
                email: email,
                phoneNumber: phoneNumber,
-               message: message
+               message: message,
+               managerEmail: managerEmail
              })
 
            }else{
@@ -160,14 +154,23 @@ export default class VolunteerSignUp extends Component {
                name: name,
                email: email,
                phoneNumber: phoneNumber,
-               message: message
+               message: message,
+               managerEmail: managerEmail
              })
            }
 
          });
-         this.send(name, email, opportunity, date, managerName, message)
+         this.send(opportunity)
          this.props.navigation.push("vsubmit", {
-         opportunity: opportunity}
+         opportunity: opportunity,
+         date: date,
+         attending: true,
+         name: name,
+         email: email,
+         phoneNumber: phoneNumber,
+         message: message,
+         managerEmail: managerEmail
+       }
        )
      }
           }}>

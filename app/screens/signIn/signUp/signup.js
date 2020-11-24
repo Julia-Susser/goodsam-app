@@ -28,7 +28,7 @@ export default class Login extends Component {
   componentDidMount() {}
 
   render() {
-    const { navigate } = this.props.navigation;
+    const { push } = this.props.navigation;
     async function saveLoginInfo(name, email, password) {
       try {
 
@@ -87,7 +87,7 @@ export default class Login extends Component {
     displayName: name,
     }).then(function() {
       saveLoginInfo(name, email, password)
-      navigate('home2', {name: name})
+      push('home2')
     }).catch(function(error) {});
     })
     .catch(function(error) {

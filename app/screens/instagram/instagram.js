@@ -49,8 +49,7 @@ export default class Instagram extends Component{
     const db = app.database();
     db.ref('instagram').once('value')
   .then((dataSnapshot) => {
-    var link = "https://graph.instagram.com/17841444428002464/media?fields=media_url,caption,timestamp&access_token=https://graph.instagram.com/17841444428002464/media?fields=media_url,caption,timestamp&access_token=IGQVJXcGlzRS15MEtOV1V1ZAlk5eUF5NjVYN0FBZAzI0bGVybllHQ3FSRmpmVkVVeF9nS2ZAIWmoyZAVZAQVjNGMkgzaUFETXVaRlpJbTY0MXh0V0FDWTZAGT0RyZAHRwY3VfY0pReFRqb2Vn"
-    console.log(link)
+    var link = "https://graph.instagram.com/17841444428002464/media?fields=media_url,caption,timestamp&access_token=https://graph.instagram.com/17841444428002464/media?fields=media_url,caption,timestamp&access_token="+dataSnapshot.val()
     fetch(link).then(response => response.json()).then(data => {
       this.setState({ items: data["data"]})
     });
