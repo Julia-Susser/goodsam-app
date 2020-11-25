@@ -57,6 +57,7 @@ export default class Volunteer extends Component{
 this.getEmail()
 const db = firebase.database();
 db.ref('sheet_id/').once('value', querySnapShot => {
+  console.log("https://sheets.googleapis.com/v4/spreadsheets/"+querySnapShot.val()+"/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=AIzaSyAmwRJCnSaR3nv-jl24zsvZbUxzZhbbLkQ")
   fetch("https://sheets.googleapis.com/v4/spreadsheets/"+querySnapShot.val()+"/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=AIzaSyAmwRJCnSaR3nv-jl24zsvZbUxzZhbbLkQ").then(response => response.json()).then(data => {
   let batchRowValues = data.valueRanges[0].values;
   const rows = [];
