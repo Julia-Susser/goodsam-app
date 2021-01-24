@@ -17,7 +17,7 @@ import Donate from './home/donate'
 
 import Login from './signIn/login/login'
 import Signup from './signIn/signUp/signup'
-
+import SignInHome from './signIn/signInHome/SignInHome'
 
 import Start from './start'
 
@@ -73,6 +73,7 @@ render() {
           <Stack.Screen name="home2" component={Home} options={{ title: '' }}/>
           <Stack.Screen name="login" component={Login}/>
           <Stack.Screen name="signup" component={Signup} />
+          <Stack.Screen name="signInHome" component={SignInHome} />
           <Stack.Screen name="settings" component={Settings} />
           <Stack.Screen name="volunteer" component={Volunteer} />
 

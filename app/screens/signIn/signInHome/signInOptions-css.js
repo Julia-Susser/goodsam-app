@@ -15,6 +15,7 @@ import {
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
+
   scrollView: {
 
   },
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain'
   },
   body: {
-
+    width:width,
     height:height,
     backgroundColor: 'white',
   },

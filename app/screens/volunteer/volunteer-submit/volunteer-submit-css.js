@@ -17,7 +17,7 @@ var height = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   welcome: {
     marginTop:height*.05,
-    fontSize: 20,
+    fontSize: 30,
     color:'#840404',
     fontWeight: "bold",
     textAlign: 'center',

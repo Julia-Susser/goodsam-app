@@ -56,6 +56,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   Image : {
+
     width: width *.5,
     height:30,
     height:height*.1,
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
   },
   welcome: {
     marginTop:height*.05,
-    fontSize: 30,
     textAlign: 'center',
     color:'#840404',
     fontWeight: "bold",

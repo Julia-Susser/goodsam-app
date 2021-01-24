@@ -39,14 +39,14 @@ export default class ContactusSubmit extends Component{
   ){
     return (
 <SafeAreaView style={styles.body}>
-  <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('home2')}>
+  <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.push('home2')}>
     <IconEntypo name="chevron-thin-left" size={30}/>
   </TouchableOpacity>
 
 
 
   <TouchableOpacity
-   onPress={() => this.props.navigation.navigate('home2')}>
+   onPress={() => this.props.navigation.push('home2')}>
   <View style={styles.imgContainer}>
     <Image style={styles.Image} source={require('../../photos/logo1.png')}/>
     <Image style={styles.Image2} source={require('../../photos/logo2.png')}/>

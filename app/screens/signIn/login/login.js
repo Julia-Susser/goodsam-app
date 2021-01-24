@@ -43,7 +43,7 @@ export default class Login extends Component {
 }
   render() {
     const { navigation } = this.props;
-    async function saveLoginInfo(name, email, password, id) {
+    async function saveLoginInfo(navigation,page, name, email, password, id) {
       try {
 
 
@@ -52,7 +52,7 @@ export default class Login extends Component {
         await AsyncStorage.setItem('password', password)
         await AsyncStorage.setItem('id', id)
         console.log(name)
-
+        navigation.push(page)
       } catch (err){
         console.log(err)
       }
@@ -60,7 +60,7 @@ export default class Login extends Component {
     return (
 <SafeAreaView style={styles.body}>
   <ScrollView>
-  <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('home2')}>
+  <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('signInHome')}>
     <IconEntypo name="chevron-thin-left" size={30}/>
   </TouchableOpacity>
 
@@ -85,6 +85,7 @@ export default class Login extends Component {
     style={styles.sectionContainer2}
     onPress={() => {
     const { email, password } = this.state;
+    var page = this.props.route.params.page
     firebase.auth().signInWithEmailAndPassword(email, password).then(function(result) {
     var user = app.auth().currentUser;
     if (user != null) {
@@ -92,8 +93,8 @@ export default class Login extends Component {
         var email = user.email;
         var id = user.uid
     }
-    saveLoginInfo(name, email, password, id)
-    navigation.push('home2')
+    saveLoginInfo(navigation, page, name, email, password, id)
+
     })
     .catch(function(error) {
     console.log("error")

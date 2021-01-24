@@ -49,7 +49,7 @@ export default class Volunteer extends Component{
 
       }).catch(function(error) {
       console.log("error")
-      alert(error)
+
       });
 
       }
@@ -127,11 +127,11 @@ console.log(listItems)
         style={styles.scrollView}>
       <TouchableOpacity
       style={{width: 40}}
-       onPress={() => this.props.navigation.navigate('home2')}>
+       onPress={() => this.props.navigation.push('home2')}>
          <IconEntypo name="chevron-thin-left" size={30}/>
       </TouchableOpacity>
       <TouchableOpacity
-       onPress={() => this.props.navigation.navigate('home2')}>
+       onPress={() => this.props.navigation.push('home2')}>
         <View style={styles.imgContainer}>
           <Image style={styles.logo} source={require('../../photos/logo1.png')}/>
           <Image style={styles.logo2} source={require('../../photos/logo2.png')}/>

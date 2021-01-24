@@ -41,15 +41,16 @@ export default class Login extends Component {
   render() {
     const { push } = this.props.navigation;
     //const { navigation } = this.props;
+
     const db = app.database();
-    async function saveLoginInfo(name, email, password, id) {
+    async function saveLoginInfo(push, page, name, email, password, id) {
       try {
 
         await AsyncStorage.setItem('email', email)
         await AsyncStorage.setItem('name', name)
         await AsyncStorage.setItem('password', password)
         await AsyncStorage.setItem('id', id)
-
+        push(page)
 
       } catch (err){
         console.log(err)
@@ -58,7 +59,7 @@ export default class Login extends Component {
     return (
 <SafeAreaView style={styles.body}>
   <ScrollView>
-  <TouchableOpacity style={{width: 40}} onPress={() => push('home2')}>
+  <TouchableOpacity style={{width: 40}} onPress={() => this.props.navigation.navigate('signInHome')}>
     <IconEntypo name="chevron-thin-left" size={30}/>
   </TouchableOpacity>
   <Text style={styles.header}>Sign Up</Text>
@@ -100,7 +101,7 @@ export default class Login extends Component {
     style={styles.sectionContainer2}
     onPress={() => {
     const { name, email, password, code, access_code } = this.state;
-
+    var page = this.props.route.params.page;
     console.log(code)
     if (code === access_code){
       app.auth().createUserWithEmailAndPassword(email, password).then(function(result) {
@@ -114,8 +115,8 @@ export default class Login extends Component {
         if (user != null) {
             var id = user.uid
         }
-        saveLoginInfo(name, email, password, id)
-        push('home2')
+        saveLoginInfo(push, page, name, email, password, id)
+
       }).catch(function(error) {});
       })
       .catch(function(error) {

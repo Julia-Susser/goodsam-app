@@ -23,7 +23,8 @@ import IconSimple from 'react-native-vector-icons/SimpleLineIcons'
 import {app} from '../../config';
 import MenuDrawer from 'react-native-side-drawer'
 import styles from './home-css'
-import styles_restart from './signInOptions-css'
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 export default class Home extends Component{
   constructor(props) {
     super(props);
@@ -50,9 +51,13 @@ export default class Home extends Component{
   }
   getEmailName=async ()=>{
     const email = await AsyncStorage.getItem('email')
-    const name = await AsyncStorage.getItem('name')
+    var name = await AsyncStorage.getItem('name')
     console.log(name)
+    if (name != null){
+      name = name.split(" ")[0]
+    }
     this.setState({ name: name})
+    this.setState({ email: email})
     }
   toggleOpen = () => {
     this.setState({ open: !this.state.open });
@@ -60,7 +65,7 @@ export default class Home extends Component{
   toggleClose = () => {
     this.setState({ open: false });
   };
-  name = (hey) => {
+  name = () => {
     if (this.props.route.params===undefined){
       return this.state.name
     }else{
@@ -69,6 +74,7 @@ export default class Home extends Component{
   }
 
   drawerContent = () => {
+    if (this.state.logged_in != null){
     return (
       <View style={styles.animatedBox}>
         <TouchableOpacity onPress={() => {
@@ -91,6 +97,21 @@ export default class Home extends Component{
       </View>
 
     );
+  }else{
+    return (
+      <View style={styles.animatedBox}>
+        <TouchableOpacity onPress={() => {
+          this.props.navigation.push('signInHome', {page:"home2"})
+          this.setState({open: false})
+        }}>
+          <Text style={styles.sidebar_first}>Log In</Text>
+        </TouchableOpacity>
+        <View style = {styles.lineStyle} />
+
+      </View>
+
+    );
+  }
   };
   login=async ()=>{
     const { push } = this.props.navigation;
@@ -114,12 +135,12 @@ export default class Home extends Component{
 
         if (name != namey){
           logout()
-          push('home2')
+          push('signInHome')
         }
         })
         .catch(function(error) {
         logout()
-        push('home2')
+        push('signInHome')
 
         });
     }
@@ -133,23 +154,21 @@ export default class Home extends Component{
   {
 console.log(this.state.name)
 
+//{this.state.logged_in != null &&
+//}
+//, {marginTop: this.state.logged_in === null ? height*.1:0,}
 
-  if (this.state.logged_in != null && this.state.logged_in != ''){
     return (
-
-
-<MenuDrawer
-open={this.state.open}
-drawerContent={this.drawerContent()}
-drawerPercentage={45}
-animationTime={250}
-overlay={true}
-opacity={0.4}
->
+  <MenuDrawer
+  open={this.state.open}
+  drawerContent={this.drawerContent()}
+  drawerPercentage={45}
+  animationTime={250}
+  overlay={true}
+  opacity={0.4}
+  >
   <SafeAreaView>
-
   <ScrollView>
-
     <TouchableOpacity onPress={this.toggleClose} activeOpacity={1}>
       <View style={styles.body}>
 
@@ -157,17 +176,23 @@ opacity={0.4}
           <IonIcon name="md-menu" style={styles.icon} size={50}/>
         </TouchableOpacity>
 
-        <View style={styles.imgContainer}>
+        <View style={[styles.imgContainer]}>
           <Image style={styles.Image} source={require('../photos/logo1.png')}/>
           <Image style={styles.Image2} source={require('../photos/logo2.png')}/>
-          <Text style={styles.welcome}>Welcome {this.name().split(" ")[0]}</Text>
+          <Text style={[styles.welcome, {fontSize: this.state.logged_in === null ? 40:30}]}>Welcome {this.name()}</Text>
         </View>
         <TouchableOpacity style={[styles.Button, styles.donate]} onPress={() => {
-          this.props.navigation.push('donate')
+          Linking.openURL('https://goodsamfrc.org/donate/')
         }}>
           <Text style={styles.Text}>Donate</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.Button, styles.volunteer]} onPress={() => this.props.navigation.push('volunteer')}>
+        <TouchableOpacity style={[styles.Button, styles.volunteer]} onPress={() => {
+          if (this.state.logged_in != null){
+            this.props.navigation.push('volunteer')
+          }else{
+            this.props.navigation.push('signInHome', {page:"volunteer"})
+          }
+        }}>
           <Text style={styles.Text}>Volunteer</Text>
         </TouchableOpacity>
 
@@ -182,44 +207,11 @@ opacity={0.4}
       </View>
     </TouchableOpacity>
     </ScrollView>
-
-
-
-
-
-
   </SafeAreaView>
 </MenuDrawer>
 
 
     )
-  }else if (this.state.logged_in === null){
-    return(
 
-    <View style={styles.body}>
-    <View style={styles_restart.imgContainer}>
-      <Image style={styles_restart.Image} source={require('../photos/logo1.png')}/>
-      <Image style={styles_restart.Image2} source={require('../photos/logo2.png')}/>
-    </View>
-    <TouchableOpacity style={styles_restart.sectionContainer} onPress={() => this.props.navigation.push('login')}>
-      <Text style={styles_restart.Text}>Login</Text>
-    </TouchableOpacity>
-
-
-    <View style={styles_restart.or}>
-    <Text>OR</Text>
-    </View>
-
-    <TouchableOpacity style={styles_restart.sectionContainer2} onPress={() => this.props.navigation.push('signup')}>
-      <Text style={styles_restart.Text}>Signup</Text>
-    </TouchableOpacity>
-    </View>
-  )
-}else{
-  return(
-    <SafeAreaView style={styles.body}>
-    </SafeAreaView>
-  )
-}
   }
 }

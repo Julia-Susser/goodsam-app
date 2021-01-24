@@ -31,8 +31,10 @@ export default class Contactus extends Component {
   getEmailName=async ()=>{
       const email = await AsyncStorage.getItem('email')
       const name = await AsyncStorage.getItem('name')
-      this.setState({ rname: name, remail: email, name: name, email: email})
+      if (name != null && email != null){
+        this.setState({ rname: name, remail: email, name: name, email: email})
       }
+  }
   componentDidMount() {
 
     this.getEmailName()
